@@ -54,6 +54,7 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.checkBox8 = new System.Windows.Forms.CheckBox();
+			this.button3 = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -191,16 +192,18 @@
 			// 
 			// tableLayoutPanel2
 			// 
-			this.tableLayoutPanel2.ColumnCount = 2;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.ColumnCount = 3;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+			this.tableLayoutPanel2.Controls.Add(this.button3, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.button2, 1, 0);
 			this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 293);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(343, 45);
 			this.tableLayoutPanel2.TabIndex = 18;
 			// 
@@ -209,7 +212,7 @@
 			this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.button1.Location = new System.Drawing.Point(3, 3);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(165, 39);
+			this.button1.Size = new System.Drawing.Size(108, 39);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "应用设置(&A)";
 			this.button1.UseVisualStyleBackColor = true;
@@ -217,9 +220,9 @@
 			// button2
 			// 
 			this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button2.Location = new System.Drawing.Point(174, 3);
+			this.button2.Location = new System.Drawing.Point(231, 3);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(166, 39);
+			this.button2.Size = new System.Drawing.Size(109, 39);
 			this.button2.TabIndex = 1;
 			this.button2.Text = "放弃修改(&C)";
 			this.button2.UseVisualStyleBackColor = true;
@@ -377,6 +380,16 @@
 			this.checkBox8.Text = "关闭仍最小化";
 			this.checkBox8.UseVisualStyleBackColor = true;
 			// 
+			// button3
+			// 
+			this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.button3.Location = new System.Drawing.Point(117, 3);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(108, 39);
+			this.button3.TabIndex = 2;
+			this.button3.Text = "恢复默认(&D)";
+			this.button3.UseVisualStyleBackColor = true;
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -426,6 +439,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.CheckBox checkBox8;
+		private System.Windows.Forms.Button button3;
 	}
 }
 
