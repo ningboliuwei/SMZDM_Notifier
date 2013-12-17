@@ -76,7 +76,7 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(350, 341);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(349, 341);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// groupBox1
@@ -85,7 +85,7 @@
 			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(344, 197);
+			this.groupBox1.Size = new System.Drawing.Size(343, 197);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "基本设置";
@@ -96,7 +96,7 @@
 			this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.checkBox1.Location = new System.Drawing.Point(3, 3);
 			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(144, 24);
+			this.checkBox1.Size = new System.Drawing.Size(124, 24);
 			this.checkBox1.TabIndex = 2;
 			this.checkBox1.Text = "随系统启动";
 			this.checkBox1.UseVisualStyleBackColor = true;
@@ -105,9 +105,9 @@
 			// 
 			this.checkBox2.AutoSize = true;
 			this.checkBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox2.Location = new System.Drawing.Point(273, 3);
+			this.checkBox2.Location = new System.Drawing.Point(253, 3);
 			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(62, 24);
+			this.checkBox2.Size = new System.Drawing.Size(81, 24);
 			this.checkBox2.TabIndex = 3;
 			this.checkBox2.Text = "弹窗";
 			this.checkBox2.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label1.Location = new System.Drawing.Point(3, 30);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(144, 30);
+			this.label1.Size = new System.Drawing.Size(124, 30);
 			this.label1.TabIndex = 4;
 			this.label1.Text = "提醒停留时间";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -133,9 +133,9 @@
             "5",
             "10",
             "20"});
-			this.comboBox1.Location = new System.Drawing.Point(153, 33);
+			this.comboBox1.Location = new System.Drawing.Point(133, 33);
 			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(182, 23);
+			this.comboBox1.Size = new System.Drawing.Size(201, 23);
 			this.comboBox1.TabIndex = 5;
 			// 
 			// comboBox2
@@ -148,9 +148,9 @@
             "5",
             "10",
             "20"});
-			this.comboBox2.Location = new System.Drawing.Point(153, 63);
+			this.comboBox2.Location = new System.Drawing.Point(133, 63);
 			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(182, 23);
+			this.comboBox2.Size = new System.Drawing.Size(201, 23);
 			this.comboBox2.TabIndex = 8;
 			// 
 			// label2
@@ -159,7 +159,7 @@
 			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label2.Location = new System.Drawing.Point(3, 60);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(144, 30);
+			this.label2.Size = new System.Drawing.Size(124, 30);
 			this.label2.TabIndex = 7;
 			this.label2.Text = "最近信息保留条数";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,9 +173,9 @@
             "全部",
             "仅国内",
             "仅国外"});
-			this.comboBox3.Location = new System.Drawing.Point(153, 93);
+			this.comboBox3.Location = new System.Drawing.Point(133, 93);
 			this.comboBox3.Name = "comboBox3";
-			this.comboBox3.Size = new System.Drawing.Size(182, 23);
+			this.comboBox3.Size = new System.Drawing.Size(201, 23);
 			this.comboBox3.TabIndex = 10;
 			// 
 			// groupBox2
@@ -184,7 +184,7 @@
 			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox2.Location = new System.Drawing.Point(3, 206);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(344, 81);
+			this.groupBox2.Size = new System.Drawing.Size(343, 81);
 			this.groupBox2.TabIndex = 17;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "频道选择";
@@ -201,7 +201,7 @@
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(344, 45);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(343, 45);
 			this.tableLayoutPanel2.TabIndex = 18;
 			// 
 			// button1
@@ -209,7 +209,7 @@
 			this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.button1.Location = new System.Drawing.Point(3, 3);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(166, 39);
+			this.button1.Size = new System.Drawing.Size(165, 39);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "应用设置(&A)";
 			this.button1.UseVisualStyleBackColor = true;
@@ -217,7 +217,7 @@
 			// button2
 			// 
 			this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.button2.Location = new System.Drawing.Point(175, 3);
+			this.button2.Location = new System.Drawing.Point(174, 3);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(166, 39);
 			this.button2.TabIndex = 1;
@@ -227,7 +227,7 @@
 			// tableLayoutPanel3
 			// 
 			this.tableLayoutPanel3.ColumnCount = 3;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel3.Controls.Add(this.checkBox8, 1, 0);
@@ -251,9 +251,7 @@
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(338, 176);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(337, 176);
 			this.tableLayoutPanel3.TabIndex = 11;
 			// 
 			// tableLayoutPanel4
@@ -274,7 +272,7 @@
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(338, 60);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(337, 60);
 			this.tableLayoutPanel4.TabIndex = 0;
 			// 
 			// checkBox5
@@ -294,7 +292,7 @@
 			this.checkBox4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.checkBox4.Location = new System.Drawing.Point(227, 3);
 			this.checkBox4.Name = "checkBox4";
-			this.checkBox4.Size = new System.Drawing.Size(108, 24);
+			this.checkBox4.Size = new System.Drawing.Size(107, 24);
 			this.checkBox4.TabIndex = 23;
 			this.checkBox4.Text = "海淘专区";
 			this.checkBox4.UseVisualStyleBackColor = true;
@@ -338,7 +336,7 @@
 			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label3.Location = new System.Drawing.Point(3, 90);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(144, 30);
+			this.label3.Size = new System.Drawing.Size(124, 30);
 			this.label3.TabIndex = 11;
 			this.label3.Text = "商品所在地区选择";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -354,7 +352,7 @@
 			this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label4.Location = new System.Drawing.Point(3, 120);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(144, 30);
+			this.label4.Size = new System.Drawing.Size(124, 30);
 			this.label4.TabIndex = 12;
 			this.label4.Text = "自动刷新间隔（秒）";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -363,16 +361,16 @@
 			// 
 			this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
 			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox1.Location = new System.Drawing.Point(153, 123);
+			this.textBox1.Location = new System.Drawing.Point(133, 123);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(182, 22);
+			this.textBox1.Size = new System.Drawing.Size(201, 22);
 			this.textBox1.TabIndex = 13;
 			// 
 			// checkBox8
 			// 
 			this.checkBox8.AutoSize = true;
 			this.checkBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox8.Location = new System.Drawing.Point(153, 3);
+			this.checkBox8.Location = new System.Drawing.Point(133, 3);
 			this.checkBox8.Name = "checkBox8";
 			this.checkBox8.Size = new System.Drawing.Size(114, 24);
 			this.checkBox8.TabIndex = 14;
@@ -383,7 +381,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(350, 341);
+			this.ClientSize = new System.Drawing.Size(349, 341);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
