@@ -29,17 +29,18 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
-			this.comboBox3 = new System.Windows.Forms.ComboBox();
 			this.checkBox8 = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.comboBox3 = new System.Windows.Forms.ComboBox();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.comboBox2 = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
@@ -54,13 +55,19 @@
 			this.button3 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
-			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.notifyIconMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemShow = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemSilentMode = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.notifyIconMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -121,50 +128,6 @@
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(376, 176);
 			this.tableLayoutPanel3.TabIndex = 11;
 			// 
-			// comboBox1
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox1, 2);
-			this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
-            "3",
-            "5",
-            "10",
-            "20"});
-			this.comboBox1.Location = new System.Drawing.Point(133, 33);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(240, 23);
-			this.comboBox1.TabIndex = 5;
-			// 
-			// comboBox2
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox2, 2);
-			this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Items.AddRange(new object[] {
-            "3",
-            "5",
-            "10",
-            "20"});
-			this.comboBox2.Location = new System.Drawing.Point(133, 63);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(240, 23);
-			this.comboBox2.TabIndex = 8;
-			// 
-			// comboBox3
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox3, 2);
-			this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox3.FormattingEnabled = true;
-			this.comboBox3.Items.AddRange(new object[] {
-            "全部",
-            "仅国内",
-            "仅国外"});
-			this.comboBox3.Location = new System.Drawing.Point(133, 93);
-			this.comboBox3.Name = "comboBox3";
-			this.comboBox3.Size = new System.Drawing.Size(240, 23);
-			this.comboBox3.TabIndex = 10;
-			// 
 			// checkBox8
 			// 
 			this.checkBox8.AutoSize = true;
@@ -220,6 +183,50 @@
 			this.checkBox2.Text = "安静模式(不弹窗)";
 			this.checkBox2.UseVisualStyleBackColor = true;
 			// 
+			// comboBox3
+			// 
+			this.tableLayoutPanel3.SetColumnSpan(this.comboBox3, 2);
+			this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.comboBox3.FormattingEnabled = true;
+			this.comboBox3.Items.AddRange(new object[] {
+            "全部",
+            "仅国内",
+            "仅国外"});
+			this.comboBox3.Location = new System.Drawing.Point(133, 93);
+			this.comboBox3.Name = "comboBox3";
+			this.comboBox3.Size = new System.Drawing.Size(240, 23);
+			this.comboBox3.TabIndex = 10;
+			// 
+			// comboBox1
+			// 
+			this.tableLayoutPanel3.SetColumnSpan(this.comboBox1, 2);
+			this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Items.AddRange(new object[] {
+            "3",
+            "5",
+            "10",
+            "20"});
+			this.comboBox1.Location = new System.Drawing.Point(133, 33);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(240, 23);
+			this.comboBox1.TabIndex = 5;
+			// 
+			// comboBox2
+			// 
+			this.tableLayoutPanel3.SetColumnSpan(this.comboBox2, 2);
+			this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.comboBox2.FormattingEnabled = true;
+			this.comboBox2.Items.AddRange(new object[] {
+            "3",
+            "5",
+            "10",
+            "20"});
+			this.comboBox2.Location = new System.Drawing.Point(133, 63);
+			this.comboBox2.Name = "comboBox2";
+			this.comboBox2.Size = new System.Drawing.Size(240, 23);
+			this.comboBox2.TabIndex = 8;
+			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -239,7 +246,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(124, 30);
 			this.label1.TabIndex = 4;
-			this.label1.Text = "提醒停留时间";
+			this.label1.Text = "提醒停留时间（秒）";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textBox1
@@ -384,11 +391,53 @@
 			this.button1.TabIndex = 0;
 			this.button1.Text = "应用设置(&A)";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
-			// notifyIcon1
+			// notifyIcon
 			// 
-			this.notifyIcon1.Text = "notifyIcon1";
-			this.notifyIcon1.Visible = true;
+			this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this.notifyIcon.ContextMenuStrip = this.notifyIconMenuStrip;
+			this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+			this.notifyIcon.Text = "什么值得买小助手";
+			this.notifyIcon.Visible = true;
+			this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+			this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
+			this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+			// 
+			// notifyIconMenuStrip
+			// 
+			this.notifyIconMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemShow,
+            this.toolStripMenuItemSilentMode,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemExit});
+			this.notifyIconMenuStrip.Name = "notifyIconMenuStrip";
+			this.notifyIconMenuStrip.Size = new System.Drawing.Size(137, 76);
+			// 
+			// toolStripMenuItemShow
+			// 
+			this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
+			this.toolStripMenuItemShow.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemShow.Text = "显示(&S)";
+			this.toolStripMenuItemShow.Click += new System.EventHandler(this.toolStripMenuItemShow_Click);
+			// 
+			// toolStripMenuItemSilentMode
+			// 
+			this.toolStripMenuItemSilentMode.CheckOnClick = true;
+			this.toolStripMenuItemSilentMode.Name = "toolStripMenuItemSilentMode";
+			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemSilentMode.Text = "安静模式(&L)";
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+			// 
+			// toolStripMenuItemExit
+			// 
+			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
+			this.toolStripMenuItemExit.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemExit.Text = "退出(&X)";
 			// 
 			// Main
 			// 
@@ -397,9 +446,12 @@
 			this.ClientSize = new System.Drawing.Size(388, 341);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "Main";
-			this.Text = "“什么值得买”助手";
+			this.ShowInTaskbar = false;
+			this.Text = "“什么值得买”小助手";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
@@ -408,6 +460,7 @@
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.tableLayoutPanel4.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
+			this.notifyIconMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -435,11 +488,16 @@
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.CheckBox checkBox5;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.NotifyIcon notifyIcon1;
+		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.CheckBox checkBox8;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.ContextMenuStrip notifyIconMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShow;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSilentMode;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
 	}
 }
 

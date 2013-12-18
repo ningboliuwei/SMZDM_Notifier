@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 namespace SMZDM_Notifier
 {
+	using System.Diagnostics;
+
 	static class Program
 	{
 		/// <summary>
@@ -14,6 +16,17 @@ namespace SMZDM_Notifier
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+
+			#region 只允许运行一个实例
+			Process pr = Process.GetCurrentProcess();
+			Process[] prlist = Process.GetProcessesByName(pr.ProcessName);
+			
+			if (prlist.Length >= 2)
+			{
+				return;
+			}
+			#endregion
+
 			Application.Run(new Main());
 		}
 	}
