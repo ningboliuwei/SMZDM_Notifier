@@ -15,6 +15,7 @@ namespace SMZDM_Notifier
 			InitializeComponent();
 		}
 
+<<<<<<< Updated upstream
 		private void toolStripMenuItemShow_Click(object sender, EventArgs e)
 		{
 			//点击右键菜单→显示
@@ -67,10 +68,14 @@ namespace SMZDM_Notifier
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			//Feed feed = new Feed("http://feed.smzdm.com");
+			string s = FeedHelper.GetFeed("http://feed.smzdm.com");
 
-			Properties.Settings.Default.Reset();
-			MessageBox.Show();
+			MessageBox.Show(s);
+=======
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+>>>>>>> Stashed changes
 		}
 	}
 }

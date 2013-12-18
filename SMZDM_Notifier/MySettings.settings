@@ -1,6 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SMZDM_Notifier" GeneratedClassName="MySettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="StartupWithSystem" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="MinimizeWhenClose" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="SilentMode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="NotifyStayTime" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="KeepMessageAmount" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="LocationToShow" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">all</Value>
+    </Setting>
+    <Setting Name="RefreshInterval" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

@@ -43,15 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
+    <Compile Include="FeedHelper.cs" />
+=======
     <Compile Include="Feed.cs" />
     <Compile Include="Item.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MySettings.cs" />
     <Compile Include="MySettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -78,7 +81,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="app.config" />
     <None Include="MySettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>MySettings.Designer.cs</LastGenOutput>

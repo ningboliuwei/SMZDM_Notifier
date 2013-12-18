@@ -4,7 +4,11 @@ using System.Text;
 
 namespace SMZDM_Notifier
 {
-	class SettingHelper
-	{
-	}
+    class SettingHelper
+    {
+	    public static string GetSettingValue(string name)
+	    {
+		    //return Properties.Settings.Defau
+	    }
+    }
 }
