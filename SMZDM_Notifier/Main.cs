@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
 {
@@ -55,22 +56,84 @@ namespace SMZDM_Notifier
 
 		private void Main_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (MessageBox.Show(this, "确定退出程序吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+			if (chkMinimizeWhenClose.Checked == false)
 			{
-				e.Cancel = true;
+				if (
+					MessageBox.Show(this, "确定退出程序吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+						MessageBoxDefaultButton.Button2) == DialogResult.No)
+				{
+					e.Cancel = true;
+				}
+				else
+				{
+					notifyIcon.Visible = false;
+				}
 			}
 			else
 			{
-				notifyIcon.Visible = false;
+				e.Cancel = true;
+				WindowState = FormWindowState.Minimized;
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			//Feed feed = new Feed("http://feed.smzdm.com");
 
-			Properties.Settings.Default.Reset();
-			MessageBox.Show();
+		//恢复默认按钮
+		private void btnDefault_Click(object sender, EventArgs e)
+		{
+			if (MessageBox.Show(this, "确定恢复为默认设置吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+			{
+				Properties.Settings.Default.Reset();//恢复到默认设置
+
+				LoadSettings();
+			}
+
+
+		}
+
+		//应用设置按钮
+		private void btnApply_Click(object sender, EventArgs e)
+		{
+			SaveSettings();
+			LoadSettings();
+		}
+
+		private void SaveSettings()
+		{
+			Settings settings = Properties.Settings.Default;
+
+			settings.StartupWithSystem = chkStartupWithSystem.Checked;
+			settings.MinimizeWhenClose = chkMinimizeWhenClose.Checked;
+			settings.SilentMode = chkSilentMode.Checked;
+			settings.KeepMessageAmount = Convert.ToInt32(cmbKeepMessageAmount.Text);
+			settings.LocationToShow = cmbLocationToShow.Text;
+			settings.NotifyStayTime = Convert.ToInt32(cmbNotifyStayTime.Text);
+			settings.RefreshInterval = Convert.ToInt32(txtRefreshInterval.Text);
+
+			settings.Save();
+		}
+
+		private void LoadSettings()
+		{
+			Settings settings = Properties.Settings.Default;
+
+			chkStartupWithSystem.Checked = settings.StartupWithSystem;
+			chkMinimizeWhenClose.Checked = settings.MinimizeWhenClose;
+			chkSilentMode.Checked = settings.SilentMode;
+			cmbKeepMessageAmount.Text = settings.KeepMessageAmount.ToString();
+			cmbLocationToShow.Text = settings.LocationToShow.ToString();
+			cmbNotifyStayTime.Text = settings.NotifyStayTime.ToString();
+			txtRefreshInterval.Text = settings.RefreshInterval.ToString();
+		}
+
+		private void Main_Load(object sender, EventArgs e)
+		{
+			LoadSettings();
+		}
+
+		//放弃修改按钮
+		private void btnCancel_Click(object sender, EventArgs e)
+		{
+			LoadSettings();
 		}
 	}
 }

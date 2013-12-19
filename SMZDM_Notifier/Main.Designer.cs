@@ -33,17 +33,17 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.checkBox8 = new System.Windows.Forms.CheckBox();
+			this.chkMinimizeWhenClose = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.comboBox3 = new System.Windows.Forms.ComboBox();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.chkStartupWithSystem = new System.Windows.Forms.CheckBox();
+			this.chkSilentMode = new System.Windows.Forms.CheckBox();
+			this.cmbLocationToShow = new System.Windows.Forms.ComboBox();
+			this.cmbNotifyStayTime = new System.Windows.Forms.ComboBox();
+			this.cmbKeepMessageAmount = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.txtRefreshInterval = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -104,17 +104,17 @@
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
-			this.tableLayoutPanel3.Controls.Add(this.checkBox8, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.chkMinimizeWhenClose, 1, 0);
 			this.tableLayoutPanel3.Controls.Add(this.label4, 0, 4);
 			this.tableLayoutPanel3.Controls.Add(this.label3, 0, 3);
-			this.tableLayoutPanel3.Controls.Add(this.checkBox1, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.checkBox2, 2, 0);
-			this.tableLayoutPanel3.Controls.Add(this.comboBox3, 1, 3);
-			this.tableLayoutPanel3.Controls.Add(this.comboBox1, 1, 1);
-			this.tableLayoutPanel3.Controls.Add(this.comboBox2, 1, 2);
+			this.tableLayoutPanel3.Controls.Add(this.chkStartupWithSystem, 0, 0);
+			this.tableLayoutPanel3.Controls.Add(this.chkSilentMode, 2, 0);
+			this.tableLayoutPanel3.Controls.Add(this.cmbLocationToShow, 1, 3);
+			this.tableLayoutPanel3.Controls.Add(this.cmbNotifyStayTime, 1, 1);
+			this.tableLayoutPanel3.Controls.Add(this.cmbKeepMessageAmount, 1, 2);
 			this.tableLayoutPanel3.Controls.Add(this.label2, 0, 2);
 			this.tableLayoutPanel3.Controls.Add(this.label1, 0, 1);
-			this.tableLayoutPanel3.Controls.Add(this.textBox1, 1, 4);
+			this.tableLayoutPanel3.Controls.Add(this.txtRefreshInterval, 1, 4);
 			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 18);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -128,16 +128,16 @@
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(376, 176);
 			this.tableLayoutPanel3.TabIndex = 11;
 			// 
-			// checkBox8
+			// chkMinimizeWhenClose
 			// 
-			this.checkBox8.AutoSize = true;
-			this.checkBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox8.Location = new System.Drawing.Point(133, 3);
-			this.checkBox8.Name = "checkBox8";
-			this.checkBox8.Size = new System.Drawing.Size(114, 24);
-			this.checkBox8.TabIndex = 14;
-			this.checkBox8.Text = "关闭仍最小化";
-			this.checkBox8.UseVisualStyleBackColor = true;
+			this.chkMinimizeWhenClose.AutoSize = true;
+			this.chkMinimizeWhenClose.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkMinimizeWhenClose.Location = new System.Drawing.Point(133, 3);
+			this.chkMinimizeWhenClose.Name = "chkMinimizeWhenClose";
+			this.chkMinimizeWhenClose.Size = new System.Drawing.Size(114, 24);
+			this.chkMinimizeWhenClose.TabIndex = 14;
+			this.chkMinimizeWhenClose.Text = "关闭仍最小化";
+			this.chkMinimizeWhenClose.UseVisualStyleBackColor = true;
 			// 
 			// label4
 			// 
@@ -161,71 +161,76 @@
 			this.label3.Text = "商品所在地区选择";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// checkBox1
+			// chkStartupWithSystem
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox1.Location = new System.Drawing.Point(3, 3);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(124, 24);
-			this.checkBox1.TabIndex = 2;
-			this.checkBox1.Text = "随系统启动";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.chkStartupWithSystem.AutoSize = true;
+			this.chkStartupWithSystem.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkStartupWithSystem.Location = new System.Drawing.Point(3, 3);
+			this.chkStartupWithSystem.Name = "chkStartupWithSystem";
+			this.chkStartupWithSystem.Size = new System.Drawing.Size(124, 24);
+			this.chkStartupWithSystem.TabIndex = 2;
+			this.chkStartupWithSystem.Text = "随系统启动";
+			this.chkStartupWithSystem.UseVisualStyleBackColor = true;
 			// 
-			// checkBox2
+			// chkSilentMode
 			// 
-			this.checkBox2.AutoSize = true;
-			this.checkBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkBox2.Location = new System.Drawing.Point(253, 3);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(120, 24);
-			this.checkBox2.TabIndex = 3;
-			this.checkBox2.Text = "安静模式(不弹窗)";
-			this.checkBox2.UseVisualStyleBackColor = true;
+			this.chkSilentMode.AutoSize = true;
+			this.chkSilentMode.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkSilentMode.Location = new System.Drawing.Point(253, 3);
+			this.chkSilentMode.Name = "chkSilentMode";
+			this.chkSilentMode.Size = new System.Drawing.Size(120, 24);
+			this.chkSilentMode.TabIndex = 3;
+			this.chkSilentMode.Text = "安静模式(不弹窗)";
+			this.chkSilentMode.UseVisualStyleBackColor = true;
 			// 
-			// comboBox3
+			// cmbLocationToShow
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox3, 2);
-			this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox3.FormattingEnabled = true;
-			this.comboBox3.Items.AddRange(new object[] {
+			this.tableLayoutPanel3.SetColumnSpan(this.cmbLocationToShow, 2);
+			this.cmbLocationToShow.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbLocationToShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbLocationToShow.FormattingEnabled = true;
+			this.cmbLocationToShow.Items.AddRange(new object[] {
             "全部",
             "仅国内",
             "仅国外"});
-			this.comboBox3.Location = new System.Drawing.Point(133, 93);
-			this.comboBox3.Name = "comboBox3";
-			this.comboBox3.Size = new System.Drawing.Size(240, 23);
-			this.comboBox3.TabIndex = 10;
+			this.cmbLocationToShow.Location = new System.Drawing.Point(133, 93);
+			this.cmbLocationToShow.Name = "cmbLocationToShow";
+			this.cmbLocationToShow.Size = new System.Drawing.Size(240, 23);
+			this.cmbLocationToShow.TabIndex = 10;
 			// 
-			// comboBox1
+			// cmbNotifyStayTime
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox1, 2);
-			this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Items.AddRange(new object[] {
+			this.tableLayoutPanel3.SetColumnSpan(this.cmbNotifyStayTime, 2);
+			this.cmbNotifyStayTime.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbNotifyStayTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbNotifyStayTime.FormattingEnabled = true;
+			this.cmbNotifyStayTime.Items.AddRange(new object[] {
             "3",
             "5",
             "10",
             "20"});
-			this.comboBox1.Location = new System.Drawing.Point(133, 33);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(240, 23);
-			this.comboBox1.TabIndex = 5;
+			this.cmbNotifyStayTime.Location = new System.Drawing.Point(133, 33);
+			this.cmbNotifyStayTime.Name = "cmbNotifyStayTime";
+			this.cmbNotifyStayTime.Size = new System.Drawing.Size(240, 23);
+			this.cmbNotifyStayTime.TabIndex = 5;
 			// 
-			// comboBox2
+			// cmbKeepMessageAmount
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.comboBox2, 2);
-			this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Items.AddRange(new object[] {
-            "3",
-            "5",
-            "10",
-            "20"});
-			this.comboBox2.Location = new System.Drawing.Point(133, 63);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(240, 23);
-			this.comboBox2.TabIndex = 8;
+			this.tableLayoutPanel3.SetColumnSpan(this.cmbKeepMessageAmount, 2);
+			this.cmbKeepMessageAmount.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbKeepMessageAmount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbKeepMessageAmount.FormattingEnabled = true;
+			this.cmbKeepMessageAmount.Items.AddRange(new object[] {
+            "100",
+            "200",
+            "500",
+            "1000",
+            "5000",
+            "10000"});
+			this.cmbKeepMessageAmount.Location = new System.Drawing.Point(133, 63);
+			this.cmbKeepMessageAmount.Name = "cmbKeepMessageAmount";
+			this.cmbKeepMessageAmount.Size = new System.Drawing.Size(240, 23);
+			this.cmbKeepMessageAmount.TabIndex = 8;
 			// 
 			// label2
 			// 
@@ -249,14 +254,14 @@
 			this.label1.Text = "提醒停留时间（秒）";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// textBox1
+			// txtRefreshInterval
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
-			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox1.Location = new System.Drawing.Point(133, 123);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(240, 22);
-			this.textBox1.TabIndex = 13;
+			this.tableLayoutPanel3.SetColumnSpan(this.txtRefreshInterval, 2);
+			this.txtRefreshInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtRefreshInterval.Location = new System.Drawing.Point(133, 123);
+			this.txtRefreshInterval.Name = "txtRefreshInterval";
+			this.txtRefreshInterval.Size = new System.Drawing.Size(240, 22);
+			this.txtRefreshInterval.TabIndex = 13;
 			// 
 			// groupBox2
 			// 
@@ -371,6 +376,7 @@
 			this.btnDefault.TabIndex = 2;
 			this.btnDefault.Text = "恢复默认(&D)";
 			this.btnDefault.UseVisualStyleBackColor = true;
+			this.btnDefault.Click += new System.EventHandler(this.btnDefault_Click);
 			// 
 			// btnCancel
 			// 
@@ -381,6 +387,7 @@
 			this.btnCancel.TabIndex = 1;
 			this.btnCancel.Text = "放弃修改(&C)";
 			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
 			// btnApply
 			// 
@@ -391,7 +398,7 @@
 			this.btnApply.TabIndex = 0;
 			this.btnApply.Text = "应用设置(&A)";
 			this.btnApply.UseVisualStyleBackColor = true;
-			this.btnApply.Click += new System.EventHandler(this.button1_Click);
+			this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
 			// 
 			// notifyIcon
 			// 
@@ -452,6 +459,7 @@
 			this.ShowInTaskbar = false;
 			this.Text = "“什么值得买”小助手";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+			this.Load += new System.EventHandler(this.Main_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
@@ -469,12 +477,12 @@
 
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox cmbNotifyStayTime;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.ComboBox comboBox3;
-		private System.Windows.Forms.ComboBox comboBox2;
+		private System.Windows.Forms.CheckBox chkSilentMode;
+		private System.Windows.Forms.CheckBox chkStartupWithSystem;
+		private System.Windows.Forms.ComboBox cmbLocationToShow;
+		private System.Windows.Forms.ComboBox cmbKeepMessageAmount;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.GroupBox groupBox2;
@@ -490,8 +498,8 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.CheckBox checkBox8;
+		private System.Windows.Forms.TextBox txtRefreshInterval;
+		private System.Windows.Forms.CheckBox chkMinimizeWhenClose;
 		private System.Windows.Forms.Button btnDefault;
 		private System.Windows.Forms.ContextMenuStrip notifyIconMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShow;

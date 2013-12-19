@@ -44,18 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Feed.cs" />
+    <Compile Include="FeedHelper.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MySettings.cs" />
-    <Compile Include="MySettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>MySettings.settings</DependentUpon>
     </Compile>
     <Compile Include="NotifyBox.cs">
       <SubType>Form</SubType>
@@ -78,11 +73,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="app.config" />
-    <None Include="MySettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MySettings.Designer.cs</LastGenOutput>
-    </None>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
