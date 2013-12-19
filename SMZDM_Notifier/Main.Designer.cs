@@ -61,6 +61,8 @@
 			this.toolStripMenuItemSilentMode = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+			this.bgwGetFeed = new System.ComponentModel.BackgroundWorker();
+			this.btnGetFeed = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -352,13 +354,15 @@
 			// 
 			// tableLayoutPanel2
 			// 
-			this.tableLayoutPanel2.ColumnCount = 3;
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+			this.tableLayoutPanel2.ColumnCount = 4;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel2.Controls.Add(this.btnDefault, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.btnCancel, 1, 0);
 			this.tableLayoutPanel2.Controls.Add(this.btnApply, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.btnGetFeed, 3, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 293);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -370,9 +374,9 @@
 			// btnDefault
 			// 
 			this.btnDefault.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnDefault.Location = new System.Drawing.Point(130, 3);
+			this.btnDefault.Location = new System.Drawing.Point(98, 3);
 			this.btnDefault.Name = "btnDefault";
-			this.btnDefault.Size = new System.Drawing.Size(121, 39);
+			this.btnDefault.Size = new System.Drawing.Size(89, 39);
 			this.btnDefault.TabIndex = 2;
 			this.btnDefault.Text = "恢复默认(&D)";
 			this.btnDefault.UseVisualStyleBackColor = true;
@@ -381,9 +385,9 @@
 			// btnCancel
 			// 
 			this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnCancel.Location = new System.Drawing.Point(257, 3);
+			this.btnCancel.Location = new System.Drawing.Point(193, 3);
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(122, 39);
+			this.btnCancel.Size = new System.Drawing.Size(89, 39);
 			this.btnCancel.TabIndex = 1;
 			this.btnCancel.Text = "放弃修改(&C)";
 			this.btnCancel.UseVisualStyleBackColor = true;
@@ -394,7 +398,7 @@
 			this.btnApply.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.btnApply.Location = new System.Drawing.Point(3, 3);
 			this.btnApply.Name = "btnApply";
-			this.btnApply.Size = new System.Drawing.Size(121, 39);
+			this.btnApply.Size = new System.Drawing.Size(89, 39);
 			this.btnApply.TabIndex = 0;
 			this.btnApply.Text = "应用设置(&A)";
 			this.btnApply.UseVisualStyleBackColor = true;
@@ -445,6 +449,21 @@
 			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
 			this.toolStripMenuItemExit.Size = new System.Drawing.Size(138, 22);
 			this.toolStripMenuItemExit.Text = "退出(&X)";
+			// 
+			// bgwGetFeed
+			// 
+			this.bgwGetFeed.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwGetFeed_DoWork);
+			// 
+			// btnGetFeed
+			// 
+			this.btnGetFeed.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnGetFeed.Location = new System.Drawing.Point(288, 3);
+			this.btnGetFeed.Name = "btnGetFeed";
+			this.btnGetFeed.Size = new System.Drawing.Size(91, 39);
+			this.btnGetFeed.TabIndex = 3;
+			this.btnGetFeed.Text = "开始抓取(&S)";
+			this.btnGetFeed.UseVisualStyleBackColor = true;
+			this.btnGetFeed.Click += new System.EventHandler(this.btnGetFeed_Click);
 			// 
 			// Main
 			// 
@@ -506,6 +525,8 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSilentMode;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
+		private System.ComponentModel.BackgroundWorker bgwGetFeed;
+		private System.Windows.Forms.Button btnGetFeed;
 	}
 }
 

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using SMZDM_Notifier.Properties;
 
@@ -133,7 +134,31 @@ namespace SMZDM_Notifier
 		//放弃修改按钮
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
-			LoadSettings();
+			//LoadSettings();
+
+			NotifyBox frmNotifyBox = NotifyBox.GetInstance();//Form1为要弹出的窗体（提示框），
+
+			frmNotifyBox.ShowNotifyBox();
+		}
+
+		private void bgwGetFeed_DoWork(object sender, DoWorkEventArgs e)
+		{
+
+		}
+
+		private void btnGetFeed_Click(object sender, EventArgs e)
+		{
+			string startText = "开始抓取(&S)";
+			string stopText = "停止抓取&S";
+
+			if (btnGetFeed.Text == startText)
+			{
+				btnGetFeed.Text = stopText;
+			}
+			else
+			{
+				btnGetFeed.Text = startText;
+			}
 		}
 	}
 }

@@ -106,5 +106,29 @@ namespace SMZDM_Notifier.Properties {
                 this["RefreshInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int NotifyBoxWidth {
+            get {
+                return ((int)(this["NotifyBoxWidth"]));
+            }
+            set {
+                this["NotifyBoxWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int NotifyBoxHeight {
+            get {
+                return ((int)(this["NotifyBoxHeight"]));
+            }
+            set {
+                this["NotifyBoxHeight"] = value;
+            }
+        }
     }
 }
