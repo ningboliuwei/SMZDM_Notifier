@@ -16,6 +16,7 @@ namespace SMZDM_Notifier
 		private static readonly NotifyBox _instance = new NotifyBox();
 		private int staySeconds;
 		private DateTime stayBeginTime;
+
 		private NotifyBox()
 		{
 			InitializeComponent();
@@ -51,12 +52,11 @@ namespace SMZDM_Notifier
 			for (int i = 0; i <= this.Height; i += 10)
 			{
 				this.Location = new Point(p.X, p.Y - i);
-				Thread.Sleep(10);//将线程沉睡时间调的越小升起的越快
+				Thread.Sleep(10); //将线程沉睡时间调的越小升起的越快
 			}
 
-			tmrStay.Enabled = true;
+			//tmrStay.Enabled = true;
 			stayBeginTime = DateTime.Now;
-
 		}
 
 		private void NotifyBox_Load(object sender, EventArgs e)
@@ -67,15 +67,24 @@ namespace SMZDM_Notifier
 			Width = settings.NotifyBoxWidth;
 			Height = settings.NotifyBoxHeight;
 
-			//StreamReader streamReader = new StreamReader("NotifyBox.html");
+			StreamReader streamReader = new StreamReader("NotifyBox.html");
 
-			//string s = streamReader.ReadToEnd();
+			string s = streamReader.ReadToEnd();
 
-			//wbsContent.DocumentText = s;
+			Feed feed = new Feed("http://feed.smzdm.com");
 
-			wbsContent.Navigate(appPath + "\\NotifyBox.html");
+			Item item = feed.Items[0];
 
+			s = s.Replace("@title", item.Title)
+				.Replace("@link", item.Link)
+				.Replace("@pubDate", item.PubDate)
+				.Replace("@descriptionEncoded", item.ContentEncoded)
+				.Replace("@imgUrl",item.ImgUrls[0]);
 
+			wbsContent.Url = new Uri(appPath + "\\NotifyBox.html");
+			wbsContent.Document.Write(s);
+
+			//wbsContent.Navigate(appPath + "\\NotifyBox.html");
 		}
 
 		private void tmrStay_Tick(object sender, EventArgs e)
@@ -85,19 +94,12 @@ namespace SMZDM_Notifier
 			if (currentTimeSpan.Seconds >= staySeconds)
 			{
 				this.Visible = false;
-				tmrStay.Enabled = false;
+				//tmrStay.Enabled = false;
 			}
 		}
 
 		private void wbsContent_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
-			Feed feed = new Feed("http://feed.smzdm.com");
-
-			Item item = feed.Items[0];
-
-			//wbsContent.DocumentText = wbsContent.DocumentText.Replace("@itemTitle", item.Title)
-															 //.Replace("@itemDate", item.PubDate)
-															 //.Replace("@itemDescription", item.Description);
 		}
 	}
 }

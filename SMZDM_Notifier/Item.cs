@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Xml;
 
 namespace SMZDM_Notifier
@@ -17,6 +20,8 @@ namespace SMZDM_Notifier
 		public string Description { get; set; }
 		public string ContentEncoded { get; set; }
 
+		public IList<string> ImgUrls { get; set; }
+
 		public Item(string text)
 		{
 			XmlDocument doc = new XmlDocument();
@@ -30,6 +35,15 @@ namespace SMZDM_Notifier
 				PubDate = doc.GetElementsByTagName("pubDate")[0].InnerText;
 				Description = doc.GetElementsByTagName("description")[0].InnerText;
 				ContentEncoded = doc.GetElementsByTagName("content:encoded")[0].InnerText;
+
+				Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+
+				ImgUrls = new List<string>();
+				foreach (Match m in regImg.Matches(ContentEncoded))
+				{
+					ImgUrls.Add(m.Groups["imgUrl"].Value);
+					ContentEncoded = ContentEncoded.Replace(m.Value, "");
+				}
 			}
 			catch (Exception exception)
 			{

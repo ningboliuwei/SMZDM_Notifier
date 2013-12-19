@@ -55,6 +55,7 @@
 			this.btnDefault = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnApply = new System.Windows.Forms.Button();
+			this.btnGetFeed = new System.Windows.Forms.Button();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.notifyIconMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,6 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.bgwGetFeed = new System.ComponentModel.BackgroundWorker();
-			this.btnGetFeed = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -404,6 +404,17 @@
 			this.btnApply.UseVisualStyleBackColor = true;
 			this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
 			// 
+			// btnGetFeed
+			// 
+			this.btnGetFeed.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnGetFeed.Location = new System.Drawing.Point(288, 3);
+			this.btnGetFeed.Name = "btnGetFeed";
+			this.btnGetFeed.Size = new System.Drawing.Size(91, 39);
+			this.btnGetFeed.TabIndex = 3;
+			this.btnGetFeed.Text = "开始抓取(&S)";
+			this.btnGetFeed.UseVisualStyleBackColor = true;
+			this.btnGetFeed.Click += new System.EventHandler(this.btnGetFeed_Click);
+			// 
 			// notifyIcon
 			// 
 			this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -453,17 +464,6 @@
 			// bgwGetFeed
 			// 
 			this.bgwGetFeed.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwGetFeed_DoWork);
-			// 
-			// btnGetFeed
-			// 
-			this.btnGetFeed.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnGetFeed.Location = new System.Drawing.Point(288, 3);
-			this.btnGetFeed.Name = "btnGetFeed";
-			this.btnGetFeed.Size = new System.Drawing.Size(91, 39);
-			this.btnGetFeed.TabIndex = 3;
-			this.btnGetFeed.Text = "开始抓取(&S)";
-			this.btnGetFeed.UseVisualStyleBackColor = true;
-			this.btnGetFeed.Click += new System.EventHandler(this.btnGetFeed_Click);
 			// 
 			// Main
 			// 

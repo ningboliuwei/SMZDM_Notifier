@@ -28,10 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyBox));
 			this.wbsContent = new System.Windows.Forms.WebBrowser();
-			this.tmrStay = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
 			// wbsContent
@@ -45,10 +43,6 @@
 			this.wbsContent.TabIndex = 0;
 			this.wbsContent.Url = new System.Uri("http://www.smzdm.com", System.UriKind.Absolute);
 			this.wbsContent.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbsContent_DocumentCompleted);
-			// 
-			// tmrStay
-			// 
-			this.tmrStay.Tick += new System.EventHandler(this.tmrStay_Tick);
 			// 
 			// NotifyBox
 			// 
@@ -72,6 +66,5 @@
 		#endregion
 
 		private System.Windows.Forms.WebBrowser wbsContent;
-		private System.Windows.Forms.Timer tmrStay;
 	}
 }
