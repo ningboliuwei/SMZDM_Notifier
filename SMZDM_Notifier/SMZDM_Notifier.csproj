@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="default.ico" />
+    <Content Include="docs\feed.xml" />
     <Content Include="NotifyBox.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

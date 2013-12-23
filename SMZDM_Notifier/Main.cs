@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,8 @@ namespace SMZDM_Notifier
 {
 	public partial class Main : Form
 	{
+		private bool isGetting = false;
+
 		public Main()
 		{
 			InitializeComponent();
@@ -144,34 +147,7 @@ namespace SMZDM_Notifier
 
 		private void bgwGetFeed_DoWork(object sender, DoWorkEventArgs e)
 		{
-			string[] urls = new string[] { "http://feed.smzdm.com", "http://haitao.smzdm.com/feed", "http://jy.smzdm.com/feed" };
 
-			while (true)
-			{
-				IList<Feed> feeds = new List<Feed>();
-
-				foreach (string url in urls)
-				{
-					feeds.Add(new Feed(url));
-				}
-
-				ItemSet itemSet = new ItemSet();
-
-				foreach (Feed feed in feeds)
-				{
-					foreach (Item item in feed.Items)
-					{
-						itemSet.Add(item);
-					}
-
-				}
-
-				ItemBase itemBase = new ItemBase(itemSet);
-
-
-
-				itemBase.Save();
-			}
 
 
 
@@ -190,6 +166,62 @@ namespace SMZDM_Notifier
 			{
 				btnGetFeed.Text = startText;
 			}
+
+
+		
+		}
+
+		public void StartGetting()
+		{
+			string[] urls = new string[] { "http://feed.smzdm.com;首页", "http://jy.smzdm.com/feed;发现" };
+
+
+			IList<Feed> feeds = new List<Feed>();
+
+			foreach (string url in urls)
+			{
+				feeds.Add(new Feed(url.Split(';')[0], url.Split(';')[1]));
+			}
+
+
+			IList<Item> items = new List<Item>();
+
+			foreach (Feed feed in feeds)
+			{
+				foreach (var item in feed.Items)
+				{
+					items.Add(item);
+				}
+			}
+
+
+
+			int i = 1;
+
+			//Thread.Sleep(new TimeSpan(0, 0, 5, 0));
+
+			//ItemSet itemSet = new ItemSet();
+
+			//foreach (Feed feed in feeds)
+			//{
+			//	foreach (Item item in feed.Items)
+			//	{
+			//		itemSet.Add(item);
+			//	}
+
+			//}
+
+			//ItemBase itemBase = new ItemBase(itemSet);
+
+
+
+			//itemBase.Save();
+		}
+
+		public void StopGetting()
+		{
+			
 		}
 	}
 }
+

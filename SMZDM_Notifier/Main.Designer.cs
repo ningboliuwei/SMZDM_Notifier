@@ -463,6 +463,7 @@
 			// 
 			// bgwGetFeed
 			// 
+			this.bgwGetFeed.WorkerSupportsCancellation = true;
 			this.bgwGetFeed.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwGetFeed_DoWork);
 			// 
 			// Main

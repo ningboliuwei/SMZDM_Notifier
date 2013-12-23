@@ -71,7 +71,7 @@ namespace SMZDM_Notifier
 
 			string s = streamReader.ReadToEnd();
 
-			Feed feed = new Feed("http://feed.smzdm.com");
+			Feed feed = new Feed("http://feed.smzdm.com","首页");
 
 			Item item = feed.Items[0];
 

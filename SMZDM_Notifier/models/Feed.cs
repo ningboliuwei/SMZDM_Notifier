@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace SMZDM_Notifier
 {
-	class Feed
+	internal class Feed
 	{
 		private string _lastBuildDate;
 		private string _channel;
@@ -14,6 +14,7 @@ namespace SMZDM_Notifier
 
 		public Feed(string url, string channel)
 		{
+			_channel = channel;
 			XmlDocument doc = new XmlDocument();
 
 			try
@@ -22,22 +23,22 @@ namespace SMZDM_Notifier
 			}
 			catch (Exception exception)
 			{
-
 				throw new Exception(exception.Message);
 			}
-			
-			_text = doc.OuterXml;//完整的XML代码
-			_lastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText;//RSS更新时间
+
+			_text = doc.OuterXml; //完整的XML代码
+			_lastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText; //RSS更新时间
 			_channel = channel;
 
 			XmlNodeList itemNodes = doc.GetElementsByTagName("item");
 
 			foreach (XmlNode itemNode in itemNodes)
 			{
-				_items.Add(new Item(itemNode.OuterXml));
+				Item item = new Item(itemNode.OuterXml);
+
+				item.Channel = channel;
+				_items.Add(item);
 			}
-
-
 		}
 
 
@@ -59,6 +60,10 @@ namespace SMZDM_Notifier
 			set { _text = value; }
 		}
 
-
+		public string Channel
+		{
+			get { return _channel; }
+			set { _channel = value; }
+		}
 	}
 }

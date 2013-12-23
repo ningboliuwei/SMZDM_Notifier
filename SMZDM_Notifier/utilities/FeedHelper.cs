@@ -6,9 +6,9 @@ namespace SMZDM_Notifier.utilities
 {
 	class FeedHelper
 	{
-		public Feed GetFeed(string url)
-		{
-			return new Feed(url);
-		}
+		//public Feed GetFeed(string url)
+		//{
+		//	//return new Feed(url);
+		//}
 	}
 }
