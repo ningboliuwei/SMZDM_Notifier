@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using SMZDM_Notifier.models;
 using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
@@ -143,6 +144,36 @@ namespace SMZDM_Notifier
 
 		private void bgwGetFeed_DoWork(object sender, DoWorkEventArgs e)
 		{
+			string[] urls = new string[] { "http://feed.smzdm.com", "http://haitao.smzdm.com/feed", "http://jy.smzdm.com/feed" };
+
+			while (true)
+			{
+				IList<Feed> feeds = new List<Feed>();
+
+				foreach (string url in urls)
+				{
+					feeds.Add(new Feed(url));
+				}
+
+				ItemSet itemSet = new ItemSet();
+
+				foreach (Feed feed in feeds)
+				{
+					foreach (Item item in feed.Items)
+					{
+						itemSet.Add(item);
+					}
+
+				}
+
+				ItemBase itemBase = new ItemBase(itemSet);
+
+
+
+				itemBase.Save();
+			}
+
+
 
 		}
 

@@ -434,12 +434,12 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
 			this.notifyIconMenuStrip.Name = "notifyIconMenuStrip";
-			this.notifyIconMenuStrip.Size = new System.Drawing.Size(139, 76);
+			this.notifyIconMenuStrip.Size = new System.Drawing.Size(135, 76);
 			// 
 			// toolStripMenuItemShow
 			// 
 			this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
-			this.toolStripMenuItemShow.Size = new System.Drawing.Size(138, 22);
+			this.toolStripMenuItemShow.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemShow.Text = "显示(&S)";
 			this.toolStripMenuItemShow.Click += new System.EventHandler(this.toolStripMenuItemShow_Click);
 			// 
@@ -447,18 +447,18 @@
 			// 
 			this.toolStripMenuItemSilentMode.CheckOnClick = true;
 			this.toolStripMenuItemSilentMode.Name = "toolStripMenuItemSilentMode";
-			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(138, 22);
+			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemSilentMode.Text = "安静模式(&L)";
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(131, 6);
 			// 
 			// toolStripMenuItemExit
 			// 
 			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-			this.toolStripMenuItemExit.Size = new System.Drawing.Size(138, 22);
+			this.toolStripMenuItemExit.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemExit.Text = "退出(&X)";
 			// 
 			// bgwGetFeed

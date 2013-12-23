@@ -22,6 +22,8 @@ namespace SMZDM_Notifier
 
 		public IList<string> ImgUrls { get; set; }
 
+		public string Channel { get; set; }
+
 		public Item(string text)
 		{
 			XmlDocument doc = new XmlDocument();
