@@ -8,16 +8,13 @@ namespace SMZDM_Notifier.models
 {
 	class ItemSet
 	{
-		private IList<Item> _items = new List<Item>();
+		private IList<Item> _items=new List<Item>();
 
 		private string _text;
 
 		public ItemSet()
 		{
-			//XmlDocument doc = new XmlDocument();
-
-
-
+			
 		}
 
 		public IList<Item> Items
@@ -42,5 +39,7 @@ namespace SMZDM_Notifier.models
 		{
 			_items.Remove(item);
 		}
+
+
 	}
 }

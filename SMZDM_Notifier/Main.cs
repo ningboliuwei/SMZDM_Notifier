@@ -167,8 +167,14 @@ namespace SMZDM_Notifier
 				btnGetFeed.Text = startText;
 			}
 
+			if (!isGetting)
+			{
 
-		
+			}
+
+			StartGetting();
+
+
 		}
 
 		public void StartGetting()
@@ -176,24 +182,39 @@ namespace SMZDM_Notifier
 			string[] urls = new string[] { "http://feed.smzdm.com;首页", "http://jy.smzdm.com/feed;发现" };
 
 
-			IList<Feed> feeds = new List<Feed>();
-
-			foreach (string url in urls)
+			while (true)
 			{
-				feeds.Add(new Feed(url.Split(';')[0], url.Split(';')[1]));
-			}
+				IList<Feed> feeds = new List<Feed>();
 
-
-			IList<Item> items = new List<Item>();
-
-			foreach (Feed feed in feeds)
-			{
-				foreach (var item in feed.Items)
+				foreach (string url in urls)
 				{
-					items.Add(item);
+					feeds.Add(new Feed(url.Split(';')[0], url.Split(';')[1]));
 				}
-			}
 
+
+				ItemSet itemSet = new ItemSet();
+				ItemBase itemBase = new ItemBase(itemSet);
+
+				DateTime latestItemBasePubDate = itemBase.GetLatestPubDate();
+
+				foreach (Feed feed in feeds)
+				{
+					foreach (Item item in feed.Items)
+					{
+						if (DateTime.Parse(item.PubDate) > latestItemBasePubDate)
+						{
+							itemSet.Add(item);
+						}
+					}
+				}
+
+
+				itemBase.Save();
+
+
+
+				Thread.Sleep(new TimeSpan(0, 0, 1, 30));
+			}
 
 
 			int i = 1;
@@ -220,7 +241,7 @@ namespace SMZDM_Notifier
 
 		public void StopGetting()
 		{
-			
+
 		}
 	}
 }

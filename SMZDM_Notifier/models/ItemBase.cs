@@ -13,13 +13,15 @@ namespace SMZDM_Notifier.models
 
 		private const string FILE_NAME = "ItemBase.xml";
 
+		private string FILE_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items></items>";
+
 		private string filePath = Application.StartupPath + "\\" + FILE_NAME;
 
 		private ItemSet _itemSet;
 
 		private XmlDocument doc;
 
-		private string XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
+	
 
 		public ItemBase(ItemSet itemSet)
 		{
@@ -34,10 +36,15 @@ namespace SMZDM_Notifier.models
 				}
 				else
 				{
-					doc.LoadXml(XML_DECLARATION);
+					doc.LoadXml(FILE_HEADER);
 				}
 
-				XmlNode itemsNode = doc.GetElementsByTagName("items")[0];
+				foreach (Item item in _itemSet.Items)
+				{
+					XmlNode itemNode = doc.CreateElement("item");
+					itemNode.InnerXml = item.Text;
+					doc.DocumentElement.AppendChild(itemNode);
+				}
 				
 				
 
@@ -68,6 +75,25 @@ namespace SMZDM_Notifier.models
 				throw new Exception(exception.Message);
 			}
 
+		}
+
+		public DateTime GetLatestPubDate()
+		{
+			DateTime currentLatestPubDate = DateTime.MinValue;
+
+			foreach (Item item in _itemSet.Items)
+			{
+				DateTime pubDate = DateTime.Parse(item.PubDate);
+
+				if (pubDate > currentLatestPubDate)
+				{
+					currentLatestPubDate = pubDate;
+				}
+
+				
+			}
+
+			return currentLatestPubDate;
 		}
 
 	}
