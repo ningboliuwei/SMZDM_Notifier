@@ -21,13 +21,25 @@
       <Value Profile="(Default)">全部</Value>
     </Setting>
     <Setting Name="RefreshInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="NotifyBoxWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">400</Value>
     </Setting>
     <Setting Name="NotifyBoxHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="MinimizeWhenStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoStartFetching" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ChannelUrls" Type="System.String" Scope="User">
+      <Value Profile="(Default)">优惠精选|http://feed.smzdm.com|True;海淘专区|http://haitao.smzdm.com/feed|True;经验盒子|http://jy.smzdm.com/feed|True;晒物广场|http://show.smzdm.com/feed|True;发现频道|http://fx.smzdm.com/feed|True</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

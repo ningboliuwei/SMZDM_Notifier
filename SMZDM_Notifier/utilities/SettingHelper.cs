@@ -4,11 +4,19 @@ using System.Text;
 
 namespace SMZDM_Notifier
 {
+	using SMZDM_Notifier.Properties;
+
 	class SettingHelper
 	{
-		public static string GetSingleSettingValue(string name)
+		private static Settings settings = Properties.Settings.Default;
+		//public static string GetSettingValue(string name)
+		//{
+		//	return settings.
+		//}
+
+		public static void Reset()
 		{
-			return "1";
+			settings.Reset();
 		}
 	}
 }
