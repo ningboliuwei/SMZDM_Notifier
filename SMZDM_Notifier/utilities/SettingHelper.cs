@@ -14,6 +14,8 @@ namespace SMZDM_Notifier
 		//	return settings.
 		//}
 
+
+
 		public static void Reset()
 		{
 			settings.Reset();

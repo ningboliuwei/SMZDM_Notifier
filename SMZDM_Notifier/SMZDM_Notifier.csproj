@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>default.ico</ApplicationIcon>
+    <ApplicationIcon>images\default.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,6 +52,12 @@
     <Compile Include="models\Feed.cs" />
     <Compile Include="models\ItemBase.cs" />
     <Compile Include="models\Item.cs" />
+    <Compile Include="MyAboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyAboutBox.Designer.cs">
+      <DependentUpon>MyAboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Preferences.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     <Compile Include="utilities\SettingHelper.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyAboutBox.resx">
+      <DependentUpon>MyAboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Preferences.resx">
       <DependentUpon>Preferences.cs</DependentUpon>
@@ -100,12 +109,13 @@
     <None Include="docs\什么值得买提醒器.xmind" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="close.png" />
-    <Content Include="gear.png" />
-    <Content Include="info.png" />
+    <Content Include="images\close.png" />
+    <Content Include="images\gear.png" />
+    <Content Include="images\info.png" />
+    <Content Include="images\refresh.png" />
     <Content Include="right.png" />
-    <Content Include="settings.png" />
-    <EmbeddedResource Include="default.ico" />
+    <Content Include="images\smzdm128.png" />
+    <EmbeddedResource Include="images\default.ico" />
     <Content Include="docs\feed.xml" />
     <Content Include="NotifyBox.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

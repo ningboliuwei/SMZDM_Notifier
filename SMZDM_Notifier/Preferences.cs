@@ -120,7 +120,7 @@ namespace SMZDM_Notifier
 				//{
 				//	CheckBox checkBox = control as CheckBox;
 
-				//	if (channel == checkBox.Text)
+				//	if (channel == checkBox.text)
 				//	{
 				//		checkedStatus = checkBox.Checked;
 				//		break;

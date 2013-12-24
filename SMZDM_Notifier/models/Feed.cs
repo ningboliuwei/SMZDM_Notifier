@@ -12,7 +12,7 @@ namespace SMZDM_Notifier
 		private IList<Item> _items = new List<Item>();
 		private string _text;
 
-		public Feed(string url, string channel)
+		public Feed( string channel,string url)
 		{
 			_channel = channel;
 			XmlDocument doc = new XmlDocument();

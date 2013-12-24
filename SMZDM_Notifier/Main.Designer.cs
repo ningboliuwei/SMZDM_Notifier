@@ -46,6 +46,7 @@
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.bgwNotify = new System.ComponentModel.BackgroundWorker();
+			this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripMain.SuspendLayout();
 			this.notifyIconMenuStrip.SuspendLayout();
@@ -90,6 +91,7 @@
 			this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStart,
             this.toolStripStop,
+            this.toolStripRefresh,
             this.toolStripPreferences,
             this.toolStripAbout});
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
@@ -106,7 +108,7 @@
 			this.toolStripStart.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripStart.Name = "toolStripStart";
 			this.toolStripStart.Size = new System.Drawing.Size(34, 34);
-			this.toolStripStart.Text = "toolStripButton2";
+			this.toolStripStart.Text = "开始抓取";
 			this.toolStripStart.Click += new System.EventHandler(this.toolStripStart_Click);
 			// 
 			// toolStripStop
@@ -117,7 +119,7 @@
 			this.toolStripStop.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripStop.Name = "toolStripStop";
 			this.toolStripStop.Size = new System.Drawing.Size(34, 34);
-			this.toolStripStop.Text = "toolStripButton1";
+			this.toolStripStop.Text = "停止抓取";
 			this.toolStripStop.Visible = false;
 			this.toolStripStop.Click += new System.EventHandler(this.toolStripStop_Click);
 			// 
@@ -129,7 +131,7 @@
 			this.toolStripPreferences.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripPreferences.Name = "toolStripPreferences";
 			this.toolStripPreferences.Size = new System.Drawing.Size(34, 34);
-			this.toolStripPreferences.Text = "toolStripButton3";
+			this.toolStripPreferences.Text = "偏好设置";
 			this.toolStripPreferences.Click += new System.EventHandler(this.toolStripPreferences_Click);
 			// 
 			// toolStripAbout
@@ -140,7 +142,8 @@
 			this.toolStripAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripAbout.Name = "toolStripAbout";
 			this.toolStripAbout.Size = new System.Drawing.Size(34, 34);
-			this.toolStripAbout.Text = "toolStripButton2";
+			this.toolStripAbout.Text = "关于";
+			this.toolStripAbout.Click += new System.EventHandler(this.toolStripAbout_Click);
 			// 
 			// bgwFetchFeed
 			// 
@@ -155,7 +158,7 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
 			this.notifyIconMenuStrip.Name = "notifyIconMenuStrip";
-			this.notifyIconMenuStrip.Size = new System.Drawing.Size(153, 98);
+			this.notifyIconMenuStrip.Size = new System.Drawing.Size(137, 76);
 			// 
 			// toolStripMenuItemShow
 			// 
@@ -178,7 +181,7 @@
 			// toolStripMenuItemExit
 			// 
 			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-			this.toolStripMenuItemExit.Size = new System.Drawing.Size(152, 22);
+			this.toolStripMenuItemExit.Size = new System.Drawing.Size(136, 22);
 			this.toolStripMenuItemExit.Text = "退出(&X)";
 			this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
 			// 
@@ -189,6 +192,19 @@
 			this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
 			this.notifyIcon.Text = "什么值得买小助手";
 			this.notifyIcon.Visible = true;
+			// 
+			// bgwNotify
+			// 
+			this.bgwNotify.WorkerSupportsCancellation = true;
+			// 
+			// toolStripRefresh
+			// 
+			this.toolStripRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripRefresh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRefresh.Image")));
+			this.toolStripRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripRefresh.Name = "toolStripRefresh";
+			this.toolStripRefresh.Size = new System.Drawing.Size(36, 34);
+			this.toolStripRefresh.Text = "刷新";
 			// 
 			// Main
 			// 
@@ -230,5 +246,6 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.ComponentModel.BackgroundWorker bgwNotify;
+		private System.Windows.Forms.ToolStripButton toolStripRefresh;
 	}
 }

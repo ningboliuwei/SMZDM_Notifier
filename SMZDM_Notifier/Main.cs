@@ -22,13 +22,13 @@ namespace SMZDM_Notifier
 
 		private void toolStripStart_Click(object sender, EventArgs e)
 		{
-			//if (btnGetFeed.Text == startText)
+			//if (btnGetFeed.text == startText)
 			//{
-			//	btnGetFeed.Text = stopText;
+			//	btnGetFeed.text = stopText;
 			//}
 			//else
 			//{
-			//	btnGetFeed.Text = startText;
+			//	btnGetFeed.text = startText;
 			//}
 
 			if (!this.isFetching)
@@ -54,9 +54,17 @@ namespace SMZDM_Notifier
 
 		private void bgwFetchFeed_DoWork(object sender, DoWorkEventArgs e)
 		{
-			string[] urls = new string[] { "http://feed.smzdm.com;首页", "http://fx.smzdm.com/feed;发现频道" };
+			#region 加载复选框数组
+			string[] channelAndUrls = Properties.Settings.Default.ChannelUrls.Split(';');
+			string[] urls = new string[channelAndUrls.Length];
 
-			this.FetchFeed(urls);
+			for(int i = 0; i < channelAndUrls.Length;i++)
+			{
+				urls[i] = channelAndUrls[i].Split('|')[0] + "|" + channelAndUrls[i].Split('|')[1];
+			}
+			#endregion
+
+			this.FetchFeed(urls,  e);
 
 		}
 
@@ -88,6 +96,8 @@ namespace SMZDM_Notifier
 			{
 				isFetching = false;
 
+				bgwFetchFeed.CancelAsync();
+
 				toolStripStart.Visible = true;
 				toolStripStop.Visible = false;
 			}
@@ -98,16 +108,23 @@ namespace SMZDM_Notifier
 			Application.Exit();
 		}
 
-		public void FetchFeed(string[] urls)
+		public void FetchFeed(string[] urls,DoWorkEventArgs e)
 		{
+			int refreshInterval = Properties.Settings.Default.RefreshInterval;
+
 			while (true)
 			{
+				if (bgwFetchFeed.CancellationPending == true)
+				{
+					e.Cancel = true;
+					return;
+				}
 
 				IList<Feed> feeds = new List<Feed>();
 
 				foreach (string url in urls)
 				{
-					feeds.Add(new Feed(url.Split(';')[0], url.Split(';')[1]));
+					feeds.Add(new Feed(url.Split('|')[0], url.Split('|')[1]));
 				}
 
 				ItemSet itemSet = new ItemSet();
@@ -129,9 +146,7 @@ namespace SMZDM_Notifier
 				itemBase.DataBind();
 				itemBase.Save();
 
-
-
-				Thread.Sleep(new TimeSpan(0, 0, 0, 30));
+				Thread.Sleep(new TimeSpan(0, 0, 0,refreshInterval));
 			}
 
 
@@ -160,6 +175,13 @@ namespace SMZDM_Notifier
 		public void StopGetting()
 		{
 
+		}
+
+		private void toolStripAbout_Click(object sender, EventArgs e)
+		{
+			MyAboutBox frMyAboutBox = new MyAboutBox();
+
+			frMyAboutBox.ShowDialog();
 		}
 
 	}

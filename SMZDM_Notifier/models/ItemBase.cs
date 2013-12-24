@@ -62,13 +62,15 @@ namespace SMZDM_Notifier.models
 
 			foreach (Item item in _itemSet.Items)
 			{
-				XmlNode itemNode = doc.CreateElement("item");
-				itemNode.InnerXml = item.Text;
-
+				
+				
 				XmlNode channelNode = doc.CreateElement("channel");
 				channelNode.InnerText = item.Channel;
 
-				itemNode.AppendChild(channelNode);
+				XmlNode itemNode = doc.CreateElement("item");
+				
+
+				
 				doc.DocumentElement.AppendChild(itemNode);
 			}
 		}
