@@ -180,5 +180,41 @@ namespace SMZDM_Notifier.Properties {
                 this["Setting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("data.xml")]
+        public string DATA_FILENAME {
+            get {
+                return ((string)(this["DATA_FILENAME"]));
+            }
+            set {
+                this["DATA_FILENAME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("data.xsl")]
+        public string XSL_FILENAME {
+            get {
+                return ((string)(this["XSL_FILENAME"]));
+            }
+            set {
+                this["XSL_FILENAME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("notify.html")]
+        public string NOTIFY_FILENAME {
+            get {
+                return ((string)(this["NOTIFY_FILENAME"]));
+            }
+            set {
+                this["NOTIFY_FILENAME"] = value;
+            }
+        }
     }
 }

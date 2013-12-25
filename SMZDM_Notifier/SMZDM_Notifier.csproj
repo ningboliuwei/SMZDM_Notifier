@@ -118,7 +118,7 @@
     <Content Include="images\right.png" />
     <Content Include="images\smzdm128.png" />
     <Content Include="images\zoom.png" />
-    <Content Include="ItemBase.xsl">
+    <Content Include="data.xsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="images\default.ico" />

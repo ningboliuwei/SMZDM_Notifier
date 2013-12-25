@@ -32,6 +32,7 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.cmbRefreshInterval = new System.Windows.Forms.ComboBox();
 			this.chkAutoStartFetching = new System.Windows.Forms.CheckBox();
 			this.chkMinimizeWhenStartup = new System.Windows.Forms.CheckBox();
 			this.chkMinimizeWhenClose = new System.Windows.Forms.CheckBox();
@@ -50,7 +51,6 @@
 			this.btnDefault = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
-			this.cmbRefreshInterval = new System.Windows.Forms.ComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -119,6 +119,22 @@
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(376, 176);
 			this.tableLayoutPanel3.TabIndex = 11;
 			// 
+			// cmbRefreshInterval
+			// 
+			this.tableLayoutPanel3.SetColumnSpan(this.cmbRefreshInterval, 2);
+			this.cmbRefreshInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmbRefreshInterval.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbRefreshInterval.FormattingEnabled = true;
+			this.cmbRefreshInterval.Items.AddRange(new object[] {
+            "30",
+            "60",
+            "120",
+            "300"});
+			this.cmbRefreshInterval.Location = new System.Drawing.Point(133, 153);
+			this.cmbRefreshInterval.Name = "cmbRefreshInterval";
+			this.cmbRefreshInterval.Size = new System.Drawing.Size(240, 23);
+			this.cmbRefreshInterval.TabIndex = 17;
+			// 
 			// chkAutoStartFetching
 			// 
 			this.chkAutoStartFetching.AutoSize = true;
@@ -127,7 +143,7 @@
 			this.chkAutoStartFetching.Name = "chkAutoStartFetching";
 			this.chkAutoStartFetching.Size = new System.Drawing.Size(114, 24);
 			this.chkAutoStartFetching.TabIndex = 16;
-			this.chkAutoStartFetching.Text = "自动开始抓取";
+			this.chkAutoStartFetching.Text = "启动时开始抓取";
 			this.chkAutoStartFetching.UseVisualStyleBackColor = true;
 			// 
 			// chkMinimizeWhenStartup
@@ -344,22 +360,6 @@
 			this.btnOK.Text = "确定(&O)";
 			this.btnOK.UseVisualStyleBackColor = true;
 			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-			// 
-			// cmbRefreshInterval
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.cmbRefreshInterval, 2);
-			this.cmbRefreshInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cmbRefreshInterval.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbRefreshInterval.FormattingEnabled = true;
-			this.cmbRefreshInterval.Items.AddRange(new object[] {
-            "30",
-            "60",
-            "120",
-            "300"});
-			this.cmbRefreshInterval.Location = new System.Drawing.Point(133, 153);
-			this.cmbRefreshInterval.Name = "cmbRefreshInterval";
-			this.cmbRefreshInterval.Size = new System.Drawing.Size(240, 23);
-			this.cmbRefreshInterval.TabIndex = 17;
 			// 
 			// Preferences
 			// 

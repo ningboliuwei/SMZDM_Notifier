@@ -29,27 +29,27 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyBox));
-			this.wbsContent = new System.Windows.Forms.WebBrowser();
+			this.wbsNotify = new System.Windows.Forms.WebBrowser();
 			this.SuspendLayout();
 			// 
-			// wbsContent
+			// wbsNotify
 			// 
-			this.wbsContent.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.wbsContent.Location = new System.Drawing.Point(0, 0);
-			this.wbsContent.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wbsContent.Name = "wbsContent";
-			this.wbsContent.ScriptErrorsSuppressed = true;
-			this.wbsContent.Size = new System.Drawing.Size(384, 261);
-			this.wbsContent.TabIndex = 0;
-			this.wbsContent.Url = new System.Uri("http://www.smzdm.com", System.UriKind.Absolute);
-			this.wbsContent.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbsContent_DocumentCompleted);
+			this.wbsNotify.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.wbsNotify.Location = new System.Drawing.Point(0, 0);
+			this.wbsNotify.MinimumSize = new System.Drawing.Size(20, 20);
+			this.wbsNotify.Name = "wbsNotify";
+			this.wbsNotify.ScriptErrorsSuppressed = true;
+			this.wbsNotify.Size = new System.Drawing.Size(384, 261);
+			this.wbsNotify.TabIndex = 0;
+			this.wbsNotify.Url = new System.Uri("http://www.smzdm.com", System.UriKind.Absolute);
+			this.wbsNotify.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbsContent_DocumentCompleted);
 			// 
 			// NotifyBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(384, 261);
-			this.Controls.Add(this.wbsContent);
+			this.Controls.Add(this.wbsNotify);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -65,6 +65,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.WebBrowser wbsContent;
+		private System.Windows.Forms.WebBrowser wbsNotify;
 	}
 }

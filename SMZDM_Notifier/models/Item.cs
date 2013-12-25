@@ -20,7 +20,7 @@ namespace SMZDM_Notifier
 				Title = doc.GetElementsByTagName("title")[0].InnerText;
 				Link = doc.GetElementsByTagName("link")[0].InnerText;
 				Comments = doc.GetElementsByTagName("comments")[0].InnerText;
-				PubDate = doc.GetElementsByTagName("pubDate")[0].InnerText;
+				PubDate = DateTime.Parse(doc.GetElementsByTagName("pubDate")[0].InnerText).ToString("yyyy-MM-dd H:mm:ss");
 				Description = doc.GetElementsByTagName("description")[0].InnerText;
 				ContentEncoded = doc.GetElementsByTagName("content:encoded")[0].InnerText;
 

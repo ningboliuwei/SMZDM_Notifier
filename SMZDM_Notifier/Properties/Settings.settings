@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="SMZDM_Notifier.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SMZDM_Notifier.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="StartupWithSystem" Type="System.Boolean" Scope="User">
@@ -42,6 +40,15 @@
     </Setting>
     <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DATA_FILENAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">data.xml</Value>
+    </Setting>
+    <Setting Name="XSL_FILENAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">data.xsl</Value>
+    </Setting>
+    <Setting Name="NOTIFY_FILENAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">notify.html</Value>
     </Setting>
   </Settings>
 </SettingsFile>

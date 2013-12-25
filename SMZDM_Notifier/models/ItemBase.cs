@@ -7,26 +7,22 @@ namespace SMZDM_Notifier.models
 {
 	internal class ItemBase
 	{
-		private const string XML_FILE_NAME = "ItemBase.xml";
-		private const string XSL_FILE_NAME = "ItemBase.xsl";
-
 		private readonly ItemSet _itemSet;
-
-		private readonly XmlDocument doc;
-		private readonly string filePath = Application.StartupPath + "\\" + XML_FILE_NAME;
-		private string FILE_HEADER =string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?><items></items>",XSL_FILE_NAME);
-
+		private string dataFilePath;
+		private XmlDocument doc;
 
 		public ItemBase(ItemSet itemSet)
 		{
+			string FILE_HEADER =string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?><items></items>",Properties.Settings.Default.XSL_FILENAME);
+			this.dataFilePath = Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME;
 			_itemSet = itemSet;
 			doc = new XmlDocument();
 
 			try
 			{
-				if (File.Exists(filePath))
+				if (File.Exists(this.dataFilePath))
 				{
-					doc.Load(filePath);
+					doc.Load(this.dataFilePath);
 				}
 				else
 				{
@@ -104,7 +100,7 @@ namespace SMZDM_Notifier.models
 			try
 			{
 				
-				doc.Save(filePath);
+				doc.Save(this.dataFilePath);
 			}
 			catch (Exception exception)
 			{

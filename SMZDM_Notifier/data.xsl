@@ -14,24 +14,20 @@
         <style media="all" type="text/css">
           .ChannelTitle
           {
-          font-family:  Verdana;
           font-weight:  bold;
           text-align:  center;
-          font-size:  1.5em;
           padding-bottom:  15px;
           }
-          .ChannelTitle span
-          {
-          padding:0 2em;
-          font-weight: normal ;
-          font-size:  50%;
-          }
-          .ArticleEntry
+
+          .ArticleContainer
           {
           padding:  20px;
+          border: 1px  solid #cccccc ;
           }
+
           .ArticleTitle
           {
+          font-size:14px;
           font-weight:  bold;
           padding-left:  5px;
           padding-top:  5px;
@@ -41,29 +37,23 @@
 
           .ArticleHeader
           {
-          padding-left:  5px;
-          padding-top:  5px;
-          padding-bottom:  5px;
+          padding:5px;
           color:#666666;
-          font-size:  80%;
           }
+
           .ArticleDescription
           {
-          padding-left:  5px;
-          padding-top:  5px;
-          padding-bottom:  5px;
-          padding-right:  5px;
+          padding:5px;
           }
           .ArticleFootor
           {
           padding-top:  5px;
           padding-bottom: 5px;
-          font-size:  90%;
           }
+
           body{
           background-color:white;
-          font-size:  14px;
-          color:#333333;
+          font-size:  13px;
           }
           a:link {
           color:#3165C6;
@@ -76,22 +66,12 @@
           a:visited {
           text-decoration:none;
           }
-          ul{
-          margin:0.3em 0.5em;
-          padding:0pt;
-          }
-          ul li{
-          background-image:none;
-          margin-left:0pt;
-          margin-right:0pt;
-          padding-left:0pt;
-          padding-right:0.5em;
-          display:inline;
-          list-style-type:none;
-          }
 
           img{
-          display:block; margin:0 auto;
+          display:block;
+          margin:20px auto;
+          padding: 0px auto;
+          width:expression(this.width>600?"600px":this.width);
           }
         </style>
       </head>
@@ -111,7 +91,7 @@
   </xsl:template>-->
 
         <xsl:for-each select="items/item">
-          <div class="ArticleEntry">
+          <div class="ArticleContainer">
             <div class="ArticleTitle">
               <a href="{link}" target="_blank">
                 <xsl:value-of select="title" />
@@ -120,9 +100,7 @@
             <div class="ArticleHeader">
               <xsl:value-of select="channel" /> | <xsl:value-of select="pubDate" />
             </div>
-            <div class="ImageBlock">
-              <img src="{image}"/>
-            </div>
+
             <div class="ArticleDescription">
               <xsl:value-of select="contentEncoded" disable-output-escaping="yes" />
             </div>

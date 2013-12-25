@@ -32,13 +32,16 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
 			this.statusStripMain = new System.Windows.Forms.StatusStrip();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.wbsMain = new System.Windows.Forms.WebBrowser();
 			this.toolStripMain = new System.Windows.Forms.ToolStrip();
+			this.toolStripPrevious = new System.Windows.Forms.ToolStripButton();
+			this.toolStripNext = new System.Windows.Forms.ToolStripButton();
 			this.toolStripStart = new System.Windows.Forms.ToolStripButton();
 			this.toolStripStop = new System.Windows.Forms.ToolStripButton();
 			this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
 			this.toolStripPreferences = new System.Windows.Forms.ToolStripButton();
 			this.toolStripAbout = new System.Windows.Forms.ToolStripButton();
+			this.toolStripChannel = new System.Windows.Forms.ToolStripComboBox();
+			this.wbsMain = new System.Windows.Forms.WebBrowser();
 			this.bgwFetchFeed = new System.ComponentModel.BackgroundWorker();
 			this.notifyIconMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +50,7 @@
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.bgwNotify = new System.ComponentModel.BackgroundWorker();
-			this.toolStripPrevious = new System.Windows.Forms.ToolStripButton();
-			this.toolStripNext = new System.Windows.Forms.ToolStripButton();
-			this.toolStripChannel = new System.Windows.Forms.ToolStripComboBox();
+			this.bgwBrowser = new System.ComponentModel.BackgroundWorker();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripMain.SuspendLayout();
 			this.notifyIconMenuStrip.SuspendLayout();
@@ -67,8 +68,8 @@
 			// 
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.wbsMain, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.toolStripMain, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.wbsMain, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -77,15 +78,6 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 618);
 			this.tableLayoutPanel1.TabIndex = 2;
-			// 
-			// wbsMain
-			// 
-			this.wbsMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.wbsMain.Location = new System.Drawing.Point(3, 40);
-			this.wbsMain.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wbsMain.Name = "wbsMain";
-			this.wbsMain.Size = new System.Drawing.Size(778, 575);
-			this.wbsMain.TabIndex = 0;
 			// 
 			// toolStripMain
 			// 
@@ -105,6 +97,26 @@
 			this.toolStripMain.Size = new System.Drawing.Size(784, 37);
 			this.toolStripMain.TabIndex = 1;
 			this.toolStripMain.Text = "toolStrip1";
+			// 
+			// toolStripPrevious
+			// 
+			this.toolStripPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripPrevious.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrevious.Image")));
+			this.toolStripPrevious.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripPrevious.Name = "toolStripPrevious";
+			this.toolStripPrevious.Size = new System.Drawing.Size(36, 34);
+			this.toolStripPrevious.Text = "toolStripButton1";
+			this.toolStripPrevious.Click += new System.EventHandler(this.toolStripPrevious_Click);
+			// 
+			// toolStripNext
+			// 
+			this.toolStripNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripNext.Image = ((System.Drawing.Image)(resources.GetObject("toolStripNext.Image")));
+			this.toolStripNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripNext.Name = "toolStripNext";
+			this.toolStripNext.Size = new System.Drawing.Size(36, 34);
+			this.toolStripNext.Text = "toolStripButton1";
+			this.toolStripNext.Click += new System.EventHandler(this.toolStripNext_Click);
 			// 
 			// toolStripStart
 			// 
@@ -161,6 +173,24 @@
 			this.toolStripAbout.Text = "关于";
 			this.toolStripAbout.Click += new System.EventHandler(this.toolStripAbout_Click);
 			// 
+			// toolStripChannel
+			// 
+			this.toolStripChannel.Name = "toolStripChannel";
+			this.toolStripChannel.Size = new System.Drawing.Size(121, 37);
+			this.toolStripChannel.Click += new System.EventHandler(this.toolStripComboBox1_Click);
+			// 
+			// wbsMain
+			// 
+			this.wbsMain.AllowNavigation = false;
+			this.wbsMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.wbsMain.Location = new System.Drawing.Point(3, 40);
+			this.wbsMain.MinimumSize = new System.Drawing.Size(20, 20);
+			this.wbsMain.Name = "wbsMain";
+			this.wbsMain.ScriptErrorsSuppressed = true;
+			this.wbsMain.Size = new System.Drawing.Size(778, 575);
+			this.wbsMain.TabIndex = 2;
+			this.wbsMain.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbsMain_DocumentCompleted);
+			// 
 			// bgwFetchFeed
 			// 
 			this.bgwFetchFeed.WorkerSupportsCancellation = true;
@@ -214,31 +244,9 @@
 			// 
 			this.bgwNotify.WorkerSupportsCancellation = true;
 			// 
-			// toolStripPrevious
+			// bgwBrowser
 			// 
-			this.toolStripPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripPrevious.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrevious.Image")));
-			this.toolStripPrevious.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripPrevious.Name = "toolStripPrevious";
-			this.toolStripPrevious.Size = new System.Drawing.Size(36, 34);
-			this.toolStripPrevious.Text = "toolStripButton1";
-			this.toolStripPrevious.Click += new System.EventHandler(this.toolStripPrevious_Click);
-			// 
-			// toolStripNext
-			// 
-			this.toolStripNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripNext.Image = ((System.Drawing.Image)(resources.GetObject("toolStripNext.Image")));
-			this.toolStripNext.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripNext.Name = "toolStripNext";
-			this.toolStripNext.Size = new System.Drawing.Size(36, 34);
-			this.toolStripNext.Text = "toolStripButton1";
-			this.toolStripNext.Click += new System.EventHandler(this.toolStripNext_Click);
-			// 
-			// toolStripChannel
-			// 
-			this.toolStripChannel.Name = "toolStripChannel";
-			this.toolStripChannel.Size = new System.Drawing.Size(121, 37);
-			this.toolStripChannel.Click += new System.EventHandler(this.toolStripComboBox1_Click);
+			this.bgwBrowser.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwBrowser_DoWork);
 			// 
 			// Main
 			// 
@@ -267,7 +275,6 @@
 
 		private System.Windows.Forms.StatusStrip statusStripMain;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.WebBrowser wbsMain;
 		private System.Windows.Forms.ToolStrip toolStripMain;
 		private System.Windows.Forms.ToolStripButton toolStripStart;
 		private System.Windows.Forms.ToolStripButton toolStripStop;
@@ -285,5 +292,7 @@
 		private System.Windows.Forms.ToolStripButton toolStripPrevious;
 		private System.Windows.Forms.ToolStripButton toolStripNext;
 		private System.Windows.Forms.ToolStripComboBox toolStripChannel;
+		private System.ComponentModel.BackgroundWorker bgwBrowser;
+		private System.Windows.Forms.WebBrowser wbsMain;
 	}
 }

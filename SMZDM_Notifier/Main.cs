@@ -8,9 +8,16 @@ using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
 {
+	using System.IO;
+	using System.Text;
+	using System.Xml;
+	using System.Xml.Xsl;
+
 	public partial class Main : Form
 	{
 		private bool isFetching;
+
+		private const string XML_FILE_NAME = "ItemBase.xml";
 
 		public Main()
 		{
@@ -184,7 +191,19 @@ namespace SMZDM_Notifier
 
 		private void toolStripRefresh_Click(object sender, EventArgs e)
 		{
-			wbsMain.Navigate(Application.StartupPath + "\\" + "ItemBase.xml");
+			//wbsMain.Navigate(Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME);
+			string xmlFile = Properties.Settings.Default.DATA_FILENAME;
+			string xslFile = Properties.Settings.Default.XSL_FILENAME;
+			XslCompiledTransform xslDocument = new XslCompiledTransform();
+
+			xslDocument.Load(xslFile);
+			StringWriter stringWriter = new StringWriter();
+			XmlWriter xmlWriter = new XmlTextWriter(stringWriter);
+			xslDocument.Transform(xmlFile, xmlWriter);
+			string s = stringWriter.ToString();
+
+			wbsMain.Url = new Uri(Application.StartupPath + "\\" + Properties.Settings.Default.NOTIFY_FILENAME);
+			wbsMain.Document.Write(s);
 		}
 
 		private void toolStripComboBox1_Click(object sender, EventArgs e)
@@ -194,18 +213,27 @@ namespace SMZDM_Notifier
 
 		private void toolStripPrevious_Click(object sender, EventArgs e)
 		{
-			wbsMain.GoBack();
+			//wbsMain.GoBack();
 		}
 
 		private void toolStripNext_Click(object sender, EventArgs e)
 		{
-			wbsMain.GoForward();
+			//wbsMain.GoForward();
 		}
 
 		private void bgwFetchFeed_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			toolStripStart.Visible = true;
 			toolStripStop.Visible = false;
+		}
+
+		private void bgwBrowser_DoWork(object sender, DoWorkEventArgs e)
+		{
+			
+		}
+
+		private void wbsMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		{
 		}
 	}
 }

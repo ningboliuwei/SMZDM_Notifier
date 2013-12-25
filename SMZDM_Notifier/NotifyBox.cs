@@ -9,7 +9,6 @@ namespace SMZDM_Notifier
 {
 	public partial class NotifyBox : Form
 	{
-		private const string NOTFY_FILE_NAME = "NotifyBox.html";
 		private static readonly NotifyBox _instance = new NotifyBox();
 		private DateTime stayBeginTime;
 		private int staySeconds;
@@ -64,7 +63,7 @@ namespace SMZDM_Notifier
 			Width = settings.NotifyBoxWidth;
 			Height = settings.NotifyBoxHeight;
 
-			var streamReader = new StreamReader(NOTFY_FILE_NAME);
+			var streamReader = new StreamReader(Properties.Settings.Default.NOTIFY_FILENAME);
 
 			string s = streamReader.ReadToEnd();
 
@@ -78,10 +77,10 @@ namespace SMZDM_Notifier
 				.Replace("@descriptionEncoded", item.ContentEncoded)
 				.Replace("@imgUrl", item.ImgUrl);
 
-			wbsContent.Url = new Uri(appPath + "\\" + NOTFY_FILE_NAME);
-			wbsContent.Document.Write(s);
+			this.wbsNotify.Url = new Uri(appPath + "\\" + Properties.Settings.Default.NOTIFY_FILENAME);
+			this.wbsNotify.Document.Write(s);
 
-			//wbsContent.Navigate(appPath + "\\NotifyBox.html");
+			//wbsNotify.Navigate(appPath + "\\NotifyBox.html");
 		}
 
 		private void tmrStay_Tick(object sender, EventArgs e)
