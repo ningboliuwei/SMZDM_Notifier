@@ -47,6 +47,9 @@
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.bgwNotify = new System.ComponentModel.BackgroundWorker();
+			this.toolStripPrevious = new System.Windows.Forms.ToolStripButton();
+			this.toolStripNext = new System.Windows.Forms.ToolStripButton();
+			this.toolStripChannel = new System.Windows.Forms.ToolStripComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripMain.SuspendLayout();
 			this.notifyIconMenuStrip.SuspendLayout();
@@ -89,11 +92,14 @@
 			this.toolStripMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripMain.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripPrevious,
+            this.toolStripNext,
             this.toolStripStart,
             this.toolStripStop,
             this.toolStripRefresh,
             this.toolStripPreferences,
-            this.toolStripAbout});
+            this.toolStripAbout,
+            this.toolStripChannel});
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
 			this.toolStripMain.Name = "toolStripMain";
 			this.toolStripMain.Size = new System.Drawing.Size(784, 37);
@@ -159,6 +165,7 @@
 			// 
 			this.bgwFetchFeed.WorkerSupportsCancellation = true;
 			this.bgwFetchFeed.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwFetchFeed_DoWork);
+			this.bgwFetchFeed.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwFetchFeed_RunWorkerCompleted);
 			// 
 			// notifyIconMenuStrip
 			// 
@@ -168,30 +175,30 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
 			this.notifyIconMenuStrip.Name = "notifyIconMenuStrip";
-			this.notifyIconMenuStrip.Size = new System.Drawing.Size(135, 76);
+			this.notifyIconMenuStrip.Size = new System.Drawing.Size(137, 76);
 			// 
 			// toolStripMenuItemShow
 			// 
 			this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
-			this.toolStripMenuItemShow.Size = new System.Drawing.Size(134, 22);
+			this.toolStripMenuItemShow.Size = new System.Drawing.Size(136, 22);
 			this.toolStripMenuItemShow.Text = "显示(&S)";
 			// 
 			// toolStripMenuItemSilentMode
 			// 
 			this.toolStripMenuItemSilentMode.CheckOnClick = true;
 			this.toolStripMenuItemSilentMode.Name = "toolStripMenuItemSilentMode";
-			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(134, 22);
+			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(136, 22);
 			this.toolStripMenuItemSilentMode.Text = "安静模式(&L)";
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(131, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
 			// 
 			// toolStripMenuItemExit
 			// 
 			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-			this.toolStripMenuItemExit.Size = new System.Drawing.Size(134, 22);
+			this.toolStripMenuItemExit.Size = new System.Drawing.Size(136, 22);
 			this.toolStripMenuItemExit.Text = "退出(&X)";
 			this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
 			// 
@@ -206,6 +213,32 @@
 			// bgwNotify
 			// 
 			this.bgwNotify.WorkerSupportsCancellation = true;
+			// 
+			// toolStripPrevious
+			// 
+			this.toolStripPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripPrevious.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPrevious.Image")));
+			this.toolStripPrevious.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripPrevious.Name = "toolStripPrevious";
+			this.toolStripPrevious.Size = new System.Drawing.Size(36, 34);
+			this.toolStripPrevious.Text = "toolStripButton1";
+			this.toolStripPrevious.Click += new System.EventHandler(this.toolStripPrevious_Click);
+			// 
+			// toolStripNext
+			// 
+			this.toolStripNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripNext.Image = ((System.Drawing.Image)(resources.GetObject("toolStripNext.Image")));
+			this.toolStripNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripNext.Name = "toolStripNext";
+			this.toolStripNext.Size = new System.Drawing.Size(36, 34);
+			this.toolStripNext.Text = "toolStripButton1";
+			this.toolStripNext.Click += new System.EventHandler(this.toolStripNext_Click);
+			// 
+			// toolStripChannel
+			// 
+			this.toolStripChannel.Name = "toolStripChannel";
+			this.toolStripChannel.Size = new System.Drawing.Size(121, 37);
+			this.toolStripChannel.Click += new System.EventHandler(this.toolStripComboBox1_Click);
 			// 
 			// Main
 			// 
@@ -249,5 +282,8 @@
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.ComponentModel.BackgroundWorker bgwNotify;
 		private System.Windows.Forms.ToolStripButton toolStripRefresh;
+		private System.Windows.Forms.ToolStripButton toolStripPrevious;
+		private System.Windows.Forms.ToolStripButton toolStripNext;
+		private System.Windows.Forms.ToolStripComboBox toolStripChannel;
 	}
 }

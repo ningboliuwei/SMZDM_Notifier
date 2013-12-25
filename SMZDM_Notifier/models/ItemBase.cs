@@ -51,13 +51,48 @@ namespace SMZDM_Notifier.models
 		{
 			foreach (Item item in _itemSet.Items)
 			{
+				//item节点
+				XmlNode itemNode = doc.CreateElement("item");
+
+				//channel节点
 				XmlNode channelNode = doc.CreateElement("channel");
 				channelNode.InnerText = item.Channel;
+				itemNode.AppendChild(channelNode);
 
-				XmlNode itemNode = doc.CreateElement("item");
-				itemNode.InnerXml = item.InnerXml;
+				//image节点
+				XmlNode imgNode = doc.CreateElement("image");
+				imgNode.InnerText = item.ImgUrl;
+				itemNode.AppendChild(imgNode);
 
-				itemNode.InsertBefore(channelNode, itemNode.FirstChild);
+				//title节点
+				XmlNode titleNode = doc.CreateElement("title");
+				titleNode.InnerText = item.Title;
+				itemNode.AppendChild(titleNode);
+
+				//link节点
+				XmlNode linkNode = doc.CreateElement("link");
+				linkNode.InnerText = item.Link;
+				itemNode.AppendChild(linkNode);
+
+				//comments节点
+				XmlNode commentsNode = doc.CreateElement("comments");
+				commentsNode.InnerText = item.Comments;
+				itemNode.AppendChild(commentsNode);
+
+				//pubDate节点
+				XmlNode pubDateNode = doc.CreateElement("pubDate");
+				pubDateNode.InnerText = item.PubDate;
+				itemNode.AppendChild(pubDateNode);
+
+				//description节点
+				XmlNode descriptionNode = doc.CreateElement("description");
+				descriptionNode.InnerText = item.Description;
+				itemNode.AppendChild(descriptionNode);
+
+				//contentEncoded节点
+				XmlNode contentEncodedNode = doc.CreateElement("contentEncoded");
+				contentEncodedNode.InnerText = item.ContentEncoded;
+				itemNode.AppendChild(contentEncodedNode);
 
 				doc.DocumentElement.AppendChild(itemNode);
 			}
@@ -68,6 +103,7 @@ namespace SMZDM_Notifier.models
 		{
 			try
 			{
+				
 				doc.Save(filePath);
 			}
 			catch (Exception exception)

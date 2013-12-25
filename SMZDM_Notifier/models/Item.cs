@@ -29,11 +29,11 @@ namespace SMZDM_Notifier
 						@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>",
 						RegexOptions.IgnoreCase);
 
-				ImgUrls = new List<string>();
+
 				foreach (Match m in regImg.Matches(ContentEncoded))
 				{
-					ImgUrls.Add(m.Groups["imgUrl"].Value);
-					ContentEncoded = ContentEncoded.Replace(m.Value, "");
+					ImgUrl = m.Groups["imgUrl"].Value;
+					//ContentEncoded = ContentEncoded.Replace(m.Value, "");//去掉正文中的图片链接
 				}
 			}
 			catch (Exception exception)
@@ -43,21 +43,13 @@ namespace SMZDM_Notifier
 		}
 
 		public string Title { get; set; }
-
 		public string Link { get; set; }
-
 		public string Comments { get; set; }
-
 		public string PubDate { get; set; }
 		public string Description { get; set; }
 		public string ContentEncoded { get; set; }
-
-		public IList<string> ImgUrls { get; set; }
-
+		public string ImgUrl { get; set; }
 		public string InnerXml { get; set; }
-
-		public string OuterXml { get; set; }
-
 		public string Channel { get; set; }
 	}
 }

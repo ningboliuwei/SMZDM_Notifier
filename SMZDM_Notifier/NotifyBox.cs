@@ -9,6 +9,7 @@ namespace SMZDM_Notifier
 {
 	public partial class NotifyBox : Form
 	{
+		private const string NOTFY_FILE_NAME = "NotifyBox.html";
 		private static readonly NotifyBox _instance = new NotifyBox();
 		private DateTime stayBeginTime;
 		private int staySeconds;
@@ -63,7 +64,7 @@ namespace SMZDM_Notifier
 			Width = settings.NotifyBoxWidth;
 			Height = settings.NotifyBoxHeight;
 
-			var streamReader = new StreamReader("NotifyBox.html");
+			var streamReader = new StreamReader(NOTFY_FILE_NAME);
 
 			string s = streamReader.ReadToEnd();
 
@@ -75,9 +76,9 @@ namespace SMZDM_Notifier
 				.Replace("@link", item.Link)
 				.Replace("@pubDate", item.PubDate)
 				.Replace("@descriptionEncoded", item.ContentEncoded)
-				.Replace("@imgUrl", item.ImgUrls[0]);
+				.Replace("@imgUrl", item.ImgUrl);
 
-			wbsContent.Url = new Uri(appPath + "\\NotifyBox.html");
+			wbsContent.Url = new Uri(appPath + "\\" + NOTFY_FILE_NAME);
 			wbsContent.Document.Write(s);
 
 			//wbsContent.Navigate(appPath + "\\NotifyBox.html");

@@ -94,8 +94,7 @@ namespace SMZDM_Notifier
 
 				bgwFetchFeed.CancelAsync();
 
-				toolStripStart.Visible = true;
-				toolStripStop.Visible = false;
+			
 			}
 		}
 
@@ -186,6 +185,27 @@ namespace SMZDM_Notifier
 		private void toolStripRefresh_Click(object sender, EventArgs e)
 		{
 			wbsMain.Navigate(Application.StartupPath + "\\" + "ItemBase.xml");
+		}
+
+		private void toolStripComboBox1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void toolStripPrevious_Click(object sender, EventArgs e)
+		{
+			wbsMain.GoBack();
+		}
+
+		private void toolStripNext_Click(object sender, EventArgs e)
+		{
+			wbsMain.GoForward();
+		}
+
+		private void bgwFetchFeed_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			toolStripStart.Visible = true;
+			toolStripStop.Visible = false;
 		}
 	}
 }
