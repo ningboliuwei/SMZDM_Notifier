@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using SMZDM_Notifier.models;
 using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
@@ -24,17 +16,16 @@ namespace SMZDM_Notifier
 		private void toolStripMenuItemShow_Click(object sender, EventArgs e)
 		{
 			//点击右键菜单→显示
-			this.ShowForm();
+			ShowForm();
 		}
-
 
 
 		//显示窗体
 		private void ShowForm()
 		{
-			this.WindowState = FormWindowState.Normal;
-			this.TopMost = true;
-			this.Show();
+			WindowState = FormWindowState.Normal;
+			TopMost = true;
+			Show();
 		}
 
 		//双击通知栏图标
@@ -49,7 +40,7 @@ namespace SMZDM_Notifier
 			//鼠标单击左键时
 			if (e.Button == MouseButtons.Left)
 			{
-				this.ShowForm();
+				ShowForm();
 			}
 		}
 
@@ -59,27 +50,27 @@ namespace SMZDM_Notifier
 			//鼠标双击左键时
 			if (e.Button == MouseButtons.Left)
 			{
-				this.ShowForm();
+				ShowForm();
 			}
 		}
 
 		//关闭窗体
 		private void Main_FormClosing(object sender, FormClosingEventArgs e)
 		{
-
 		}
 
 
 		//恢复默认按钮
 		private void btnDefault_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(this, "确定恢复为默认设置吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-			{//恢复到默认设置
-				Properties.Settings.Default.Reset();
+			if (
+				MessageBox.Show(this, "确定恢复为默认设置吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+					MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+			{
+//恢复到默认设置
+				Settings.Default.Reset();
 				LoadSettings();
 			}
-
-
 		}
 
 		//应用设置按钮
@@ -87,12 +78,12 @@ namespace SMZDM_Notifier
 		{
 			SaveSettings();
 			//LoadSettings();
-			this.Close();
+			Close();
 		}
 
 		private void SaveSettings()
 		{
-			Settings settings = Properties.Settings.Default;
+			Settings settings = Settings.Default;
 
 			settings.StartupWithSystem = chkStartupWithSystem.Checked;
 			settings.MinimizeWhenClose = chkMinimizeWhenClose.Checked;
@@ -104,8 +95,8 @@ namespace SMZDM_Notifier
 			settings.MinimizeWhenStartup = chkMinimizeWhenStartup.Checked;
 			settings.AutoStartFetching = chkAutoStartFetching.Checked;
 
-
 			#region 保存频道复选框选中状态
+
 			string[] channelAndUrls = settings.ChannelUrls.Split(';');
 
 			for (int i = 0; i < channelAndUrls.Length; i++)
@@ -114,8 +105,8 @@ namespace SMZDM_Notifier
 				string url = channelAndUrls[i].Split('|')[1];
 				bool checkedStatus = bool.Parse(channelAndUrls[i].Split('|')[2]);
 
-
 				#region 稳妥的方式
+
 				//foreach (Control control in tableLayoutPanel4.Controls)
 				//{
 				//	CheckBox checkBox = control as CheckBox;
@@ -126,13 +117,14 @@ namespace SMZDM_Notifier
 				//		break;
 				//	}
 				//}
+
 				#endregion
 
 				checkedStatus = (tableLayoutPanel4.Controls[i] as CheckBox).Checked;
 				channelAndUrls[i] = channel + "|" + url + "|" + checkedStatus;
-
 			}
-			Properties.Settings.Default.ChannelUrls = string.Join(";", channelAndUrls);
+			Settings.Default.ChannelUrls = string.Join(";", channelAndUrls);
+
 			#endregion
 
 			settings.Save();
@@ -140,7 +132,7 @@ namespace SMZDM_Notifier
 
 		private void LoadSettings()
 		{
-			Settings settings = Properties.Settings.Default;
+			Settings settings = Settings.Default;
 
 			chkStartupWithSystem.Checked = settings.StartupWithSystem;
 			chkMinimizeWhenClose.Checked = settings.MinimizeWhenClose;
@@ -150,12 +142,12 @@ namespace SMZDM_Notifier
 			chkMinimizeWhenStartup.Checked = settings.MinimizeWhenStartup;
 			chkAutoStartFetching.Checked = settings.AutoStartFetching;
 			cmbKeepMessageAmount.Text = settings.KeepMessageAmount.ToString();
-			cmbLocationToShow.Text = settings.LocationToShow.ToString();
+			cmbLocationToShow.Text = settings.LocationToShow;
 			cmbNotifyStayTime.Text = settings.NotifyStayTime.ToString();
 			cmbRefreshInterval.Text = settings.RefreshInterval.ToString();
 
-
 			#region 加载复选框数组
+
 			string[] channelAndUrls = settings.ChannelUrls.Split(';');
 
 			tableLayoutPanel4.Controls.Clear();
@@ -165,15 +157,15 @@ namespace SMZDM_Notifier
 				string url = channelAndUrl.Split('|')[1];
 				bool checkedStatus = bool.Parse(channelAndUrl.Split('|')[2]);
 
-				CheckBox checkBox = new CheckBox();
+				var checkBox = new CheckBox();
 				checkBox.Text = channel;
 				checkBox.Dock = DockStyle.Fill;
 				checkBox.Checked = checkedStatus;
 
 				tableLayoutPanel4.Controls.Add(checkBox);
 			}
-			#endregion
 
+			#endregion
 		}
 
 		private void Main_Load(object sender, EventArgs e)
@@ -190,21 +182,12 @@ namespace SMZDM_Notifier
 
 			//frmNotifyBox.ShowNotifyBox();
 
-			this.Close();
+			Close();
 		}
-
-
-
-
-
-
-
 
 
 		private void cmbNotifyStayTime_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
 		}
 	}
 }
-

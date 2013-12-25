@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
+﻿using System.Collections.Generic;
 
 namespace SMZDM_Notifier.models
 {
-	class ItemSet
+	internal class ItemSet
 	{
-		private IList<Item> _items=new List<Item>();
-
-		private string _text;
-
-		public ItemSet()
-		{
-			
-		}
+		private IList<Item> _items = new List<Item>();
 
 		public IList<Item> Items
 		{
@@ -23,11 +12,7 @@ namespace SMZDM_Notifier.models
 			set { _items = value; }
 		}
 
-		public string Text
-		{
-			get { return _text; }
-			set { _text = value; }
-		}
+		public string Text { get; set; }
 
 
 		public void Add(Item item)
@@ -39,7 +24,5 @@ namespace SMZDM_Notifier.models
 		{
 			_items.Remove(item);
 		}
-
-
 	}
 }

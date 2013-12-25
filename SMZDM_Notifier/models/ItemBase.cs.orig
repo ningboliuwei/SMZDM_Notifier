@@ -1,21 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net.Mime;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace SMZDM_Notifier.models
 {
-	internal class ItemBase
+	class ItemBase
 	{
-		private const string XML_FILE_NAME = "ItemBase.xml";
-		private const string XSL_FILE_NAME = "ItemBase.xsl";
 
-		private readonly ItemSet _itemSet;
+		private const string FILE_NAME = "ItemBase.xml";
 
-		private readonly XmlDocument doc;
-		private readonly string filePath = Application.StartupPath + "\\" + XML_FILE_NAME;
-		private string FILE_HEADER =string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?><items></items>",XSL_FILE_NAME);
+		private string FILE_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items></items>";
 
+		private string filePath = Application.StartupPath + "\\" + FILE_NAME;
+
+		private ItemSet _itemSet;
+
+		private XmlDocument doc;
+
+	
 
 		public ItemBase(ItemSet itemSet)
 		{
@@ -32,7 +38,26 @@ namespace SMZDM_Notifier.models
 				{
 					doc.LoadXml(FILE_HEADER);
 				}
+<<<<<<< Updated upstream
 				//
+=======
+
+				foreach (Item item in _itemSet.Items)
+				{
+					XmlNode itemNode = doc.CreateElement("item");
+					itemNode.InnerXml = item.InnerXml;
+
+					XmlNode channelNode = doc.CreateElement("channel");
+					channelNode.InnerText = item.Channel;
+
+					itemNode.InsertBefore(channelNode, itemNode.FirstChild);
+					doc.DocumentElement.AppendChild(itemNode);
+				}
+>>>>>>> Stashed changes
+				
+				
+
+
 			}
 			catch (Exception exception)
 			{
@@ -47,22 +72,6 @@ namespace SMZDM_Notifier.models
 			//}
 		}
 
-		public void DataBind()
-		{
-			foreach (Item item in _itemSet.Items)
-			{
-				XmlNode channelNode = doc.CreateElement("channel");
-				channelNode.InnerText = item.Channel;
-
-				XmlNode itemNode = doc.CreateElement("item");
-				itemNode.InnerXml = item.InnerXml;
-
-				itemNode.InsertBefore(channelNode, itemNode.FirstChild);
-
-				doc.DocumentElement.AppendChild(itemNode);
-			}
-		}
-
 
 		public void Save()
 		{
@@ -74,9 +83,10 @@ namespace SMZDM_Notifier.models
 			{
 				throw new Exception(exception.Message);
 			}
+
 		}
 
-		public DateTime GetLatestPubDate(string channel)
+		public DateTime GetLatestPubDate()
 		{
 			DateTime currentLatestPubDate = DateTime.MinValue;
 
@@ -84,13 +94,16 @@ namespace SMZDM_Notifier.models
 			{
 				DateTime pubDate = DateTime.Parse(item.PubDate);
 
-				if (pubDate > currentLatestPubDate && item.Channel == channel)
+				if (pubDate > currentLatestPubDate)
 				{
 					currentLatestPubDate = pubDate;
 				}
+
+				
 			}
 
 			return currentLatestPubDate;
 		}
+
 	}
 }

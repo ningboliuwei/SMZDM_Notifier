@@ -113,12 +113,16 @@
     <Content Include="images\gear.png" />
     <Content Include="images\info.png" />
     <Content Include="images\refresh.png" />
-    <Content Include="right.png" />
+    <Content Include="images\right.png" />
     <Content Include="images\smzdm128.png" />
+    <Content Include="ItemBase.xsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <EmbeddedResource Include="images\default.ico" />
     <Content Include="docs\feed.xml" />
     <Content Include="NotifyBox.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,15 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using System.Xml;
 
 namespace SMZDM_Notifier
 {
-	class Item
+	internal class Item
 	{
+		public Item(string xml)
+		{
+			InnerXml = xml;
+
+			var doc = new XmlDocument();
+
+			try
+			{
+				doc.LoadXml(xml);
+				InnerXml = doc.DocumentElement.InnerXml;
+				Title = doc.GetElementsByTagName("title")[0].InnerText;
+				Link = doc.GetElementsByTagName("link")[0].InnerText;
+				Comments = doc.GetElementsByTagName("comments")[0].InnerText;
+				PubDate = doc.GetElementsByTagName("pubDate")[0].InnerText;
+				Description = doc.GetElementsByTagName("description")[0].InnerText;
+				ContentEncoded = doc.GetElementsByTagName("content:encoded")[0].InnerText;
+
+				var regImg =
+					new Regex(
+						@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>",
+						RegexOptions.IgnoreCase);
+
+				ImgUrls = new List<string>();
+				foreach (Match m in regImg.Matches(ContentEncoded))
+				{
+					ImgUrls.Add(m.Groups["imgUrl"].Value);
+					ContentEncoded = ContentEncoded.Replace(m.Value, "");
+				}
+			}
+			catch (Exception exception)
+			{
+				throw new Exception(exception.Message);
+			}
+		}
+
 		public string Title { get; set; }
 
 		public string Link { get; set; }
@@ -27,38 +59,5 @@ namespace SMZDM_Notifier
 		public string OuterXml { get; set; }
 
 		public string Channel { get; set; }
-
-		public Item(string xml)
-		{
-			this.InnerXml = xml;
-
-			XmlDocument doc = new XmlDocument();
-
-			try
-			{
-				doc.LoadXml(xml);
-				InnerXml = doc.DocumentElement.InnerXml;
-				Title = doc.GetElementsByTagName("title")[0].InnerText;
-				Link = doc.GetElementsByTagName("link")[0].InnerText;
-				Comments = doc.GetElementsByTagName("comments")[0].InnerText;
-				PubDate = doc.GetElementsByTagName("pubDate")[0].InnerText;
-				Description = doc.GetElementsByTagName("description")[0].InnerText;
-				ContentEncoded = doc.GetElementsByTagName("content:encoded")[0].InnerText;
-
-				Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
-
-				ImgUrls = new List<string>();
-				foreach (Match m in regImg.Matches(ContentEncoded))
-				{
-					ImgUrls.Add(m.Groups["imgUrl"].Value);
-					ContentEncoded = ContentEncoded.Replace(m.Value, "");
-				}
-			}
-			catch (Exception exception)
-			{
-
-				throw new Exception(exception.Message);
-			}
-		}
 	}
 }

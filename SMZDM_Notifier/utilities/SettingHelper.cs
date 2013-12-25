@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
 {
-	using SMZDM_Notifier.Properties;
-
-	class SettingHelper
+	internal class SettingHelper
 	{
-		private static Settings settings = Properties.Settings.Default;
+		private static readonly Settings settings = Settings.Default;
 		//public static string GetSettingValue(string name)
 		//{
 		//	return settings.
 		//}
-
 
 
 		public static void Reset()

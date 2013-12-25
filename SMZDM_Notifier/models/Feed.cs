@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 
 namespace SMZDM_Notifier
 {
 	internal class Feed
 	{
-		private string _lastBuildDate;
-		private string _channel;
 		private IList<Item> _items = new List<Item>();
-		private string _text;
 
-		public Feed( string channel,string url)
+		public Feed(string channel, string url)
 		{
-			_channel = channel;
-			XmlDocument doc = new XmlDocument();
+			Channel = channel;
+			var doc = new XmlDocument();
 
 			try
 			{
@@ -26,15 +22,15 @@ namespace SMZDM_Notifier
 				throw new Exception(exception.Message);
 			}
 
-			_text = doc.OuterXml; //完整的XML代码
-			_lastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText; //RSS更新时间
-			_channel = channel;
+			Text = doc.OuterXml; //完整的XML代码
+			LastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText; //RSS更新时间
+			Channel = channel;
 
 			XmlNodeList itemNodes = doc.GetElementsByTagName("item");
 
 			foreach (XmlNode itemNode in itemNodes)
 			{
-				Item item = new Item(itemNode.OuterXml);
+				var item = new Item(itemNode.OuterXml);
 
 				item.Channel = channel;
 				_items.Add(item);
@@ -42,11 +38,7 @@ namespace SMZDM_Notifier
 		}
 
 
-		public string LastBuildDate
-		{
-			get { return _lastBuildDate; }
-			set { _lastBuildDate = value; }
-		}
+		public string LastBuildDate { get; set; }
 
 		public IList<Item> Items
 		{
@@ -54,16 +46,8 @@ namespace SMZDM_Notifier
 			set { _items = value; }
 		}
 
-		public string Text
-		{
-			get { return _text; }
-			set { _text = value; }
-		}
+		public string Text { get; set; }
 
-		public string Channel
-		{
-			get { return _channel; }
-			set { _channel = value; }
-		}
+		public string Channel { get; set; }
 	}
 }

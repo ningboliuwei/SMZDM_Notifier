@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SMZDM_Notifier.utilities
+﻿namespace SMZDM_Notifier.utilities
 {
-	class FeedHelper
+	internal class FeedHelper
 	{
 		//public Feed GetFeed(string url)
 		//{

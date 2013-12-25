@@ -32,10 +32,11 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
 			this.statusStripMain = new System.Windows.Forms.StatusStrip();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+			this.wbsMain = new System.Windows.Forms.WebBrowser();
 			this.toolStripMain = new System.Windows.Forms.ToolStrip();
 			this.toolStripStart = new System.Windows.Forms.ToolStripButton();
 			this.toolStripStop = new System.Windows.Forms.ToolStripButton();
+			this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
 			this.toolStripPreferences = new System.Windows.Forms.ToolStripButton();
 			this.toolStripAbout = new System.Windows.Forms.ToolStripButton();
 			this.bgwFetchFeed = new System.ComponentModel.BackgroundWorker();
@@ -46,7 +47,6 @@
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.bgwNotify = new System.ComponentModel.BackgroundWorker();
-			this.toolStripRefresh = new System.Windows.Forms.ToolStripButton();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.toolStripMain.SuspendLayout();
 			this.notifyIconMenuStrip.SuspendLayout();
@@ -64,7 +64,7 @@
 			// 
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.Controls.Add(this.webBrowser1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.wbsMain, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.toolStripMain, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -75,14 +75,14 @@
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 618);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
-			// webBrowser1
+			// wbsMain
 			// 
-			this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.webBrowser1.Location = new System.Drawing.Point(3, 40);
-			this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-			this.webBrowser1.Name = "webBrowser1";
-			this.webBrowser1.Size = new System.Drawing.Size(778, 575);
-			this.webBrowser1.TabIndex = 0;
+			this.wbsMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.wbsMain.Location = new System.Drawing.Point(3, 40);
+			this.wbsMain.MinimumSize = new System.Drawing.Size(20, 20);
+			this.wbsMain.Name = "wbsMain";
+			this.wbsMain.Size = new System.Drawing.Size(778, 575);
+			this.wbsMain.TabIndex = 0;
 			// 
 			// toolStripMain
 			// 
@@ -123,6 +123,16 @@
 			this.toolStripStop.Visible = false;
 			this.toolStripStop.Click += new System.EventHandler(this.toolStripStop_Click);
 			// 
+			// toolStripRefresh
+			// 
+			this.toolStripRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripRefresh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRefresh.Image")));
+			this.toolStripRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripRefresh.Name = "toolStripRefresh";
+			this.toolStripRefresh.Size = new System.Drawing.Size(36, 34);
+			this.toolStripRefresh.Text = "刷新";
+			this.toolStripRefresh.Click += new System.EventHandler(this.toolStripRefresh_Click);
+			// 
 			// toolStripPreferences
 			// 
 			this.toolStripPreferences.AutoSize = false;
@@ -158,30 +168,30 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
 			this.notifyIconMenuStrip.Name = "notifyIconMenuStrip";
-			this.notifyIconMenuStrip.Size = new System.Drawing.Size(137, 76);
+			this.notifyIconMenuStrip.Size = new System.Drawing.Size(135, 76);
 			// 
 			// toolStripMenuItemShow
 			// 
 			this.toolStripMenuItemShow.Name = "toolStripMenuItemShow";
-			this.toolStripMenuItemShow.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemShow.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemShow.Text = "显示(&S)";
 			// 
 			// toolStripMenuItemSilentMode
 			// 
 			this.toolStripMenuItemSilentMode.CheckOnClick = true;
 			this.toolStripMenuItemSilentMode.Name = "toolStripMenuItemSilentMode";
-			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemSilentMode.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemSilentMode.Text = "安静模式(&L)";
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(131, 6);
 			// 
 			// toolStripMenuItemExit
 			// 
 			this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-			this.toolStripMenuItemExit.Size = new System.Drawing.Size(136, 22);
+			this.toolStripMenuItemExit.Size = new System.Drawing.Size(134, 22);
 			this.toolStripMenuItemExit.Text = "退出(&X)";
 			this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
 			// 
@@ -197,15 +207,6 @@
 			// 
 			this.bgwNotify.WorkerSupportsCancellation = true;
 			// 
-			// toolStripRefresh
-			// 
-			this.toolStripRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripRefresh.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRefresh.Image")));
-			this.toolStripRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripRefresh.Name = "toolStripRefresh";
-			this.toolStripRefresh.Size = new System.Drawing.Size(36, 34);
-			this.toolStripRefresh.Text = "刷新";
-			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -218,6 +219,7 @@
 			this.Name = "Main";
 			this.Text = "Main";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+			this.Load += new System.EventHandler(this.Main_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.toolStripMain.ResumeLayout(false);
@@ -232,7 +234,7 @@
 
 		private System.Windows.Forms.StatusStrip statusStripMain;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.WebBrowser webBrowser1;
+		private System.Windows.Forms.WebBrowser wbsMain;
 		private System.Windows.Forms.ToolStrip toolStripMain;
 		private System.Windows.Forms.ToolStripButton toolStripStart;
 		private System.Windows.Forms.ToolStripButton toolStripStop;

@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
+using SMZDM_Notifier.models;
+using SMZDM_Notifier.Properties;
 
 namespace SMZDM_Notifier
 {
-	using System.Threading;
-
-	using SMZDM_Notifier.models;
-
 	public partial class Main : Form
 	{
-		private bool isFetching = false;
+		private bool isFetching;
+
 		public Main()
 		{
 			InitializeComponent();
@@ -31,9 +28,9 @@ namespace SMZDM_Notifier
 			//	btnGetFeed.text = startText;
 			//}
 
-			if (!this.isFetching)
+			if (!isFetching)
 			{
-				this.bgwFetchFeed.DoWork += new DoWorkEventHandler(this.bgwFetchFeed_DoWork);
+				bgwFetchFeed.DoWork += bgwFetchFeed_DoWork;
 				bgwFetchFeed.RunWorkerAsync();
 
 				isFetching = true;
@@ -41,13 +38,11 @@ namespace SMZDM_Notifier
 				toolStripStart.Visible = false;
 				toolStripStop.Visible = true;
 			}
-
-
 		}
 
 		private void toolStripPreferences_Click(object sender, EventArgs e)
 		{
-			Preferences frmPreferences = new Preferences();
+			var frmPreferences = new Preferences();
 
 			frmPreferences.ShowDialog();
 		}
@@ -55,22 +50,23 @@ namespace SMZDM_Notifier
 		private void bgwFetchFeed_DoWork(object sender, DoWorkEventArgs e)
 		{
 			#region 加载复选框数组
-			string[] channelAndUrls = Properties.Settings.Default.ChannelUrls.Split(';');
-			string[] urls = new string[channelAndUrls.Length];
 
-			for(int i = 0; i < channelAndUrls.Length;i++)
+			string[] channelAndUrls = Settings.Default.ChannelUrls.Split(';');
+			var urls = new string[channelAndUrls.Length];
+
+			for (int i = 0; i < channelAndUrls.Length; i++)
 			{
 				urls[i] = channelAndUrls[i].Split('|')[0] + "|" + channelAndUrls[i].Split('|')[1];
 			}
+
 			#endregion
 
-			this.FetchFeed(urls,  e);
-
+			FetchFeed(urls, e);
 		}
 
 		private void Main_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (Properties.Settings.Default.MinimizeWhenClose == false)
+			if (Settings.Default.MinimizeWhenClose == false)
 			{
 				if (
 					MessageBox.Show(this, "确定退出程序吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
@@ -108,13 +104,13 @@ namespace SMZDM_Notifier
 			Application.Exit();
 		}
 
-		public void FetchFeed(string[] urls,DoWorkEventArgs e)
+		public void FetchFeed(string[] urls, DoWorkEventArgs e)
 		{
-			int refreshInterval = Properties.Settings.Default.RefreshInterval;
+			int refreshInterval = Settings.Default.RefreshInterval;
 
 			while (true)
 			{
-				if (bgwFetchFeed.CancellationPending == true)
+				if (bgwFetchFeed.CancellationPending)
 				{
 					e.Cancel = true;
 					return;
@@ -127,8 +123,8 @@ namespace SMZDM_Notifier
 					feeds.Add(new Feed(url.Split('|')[0], url.Split('|')[1]));
 				}
 
-				ItemSet itemSet = new ItemSet();
-				ItemBase itemBase = new ItemBase(itemSet);
+				var itemSet = new ItemSet();
+				var itemBase = new ItemBase(itemSet);
 
 				foreach (Feed feed in feeds)
 				{
@@ -146,7 +142,7 @@ namespace SMZDM_Notifier
 				itemBase.DataBind();
 				itemBase.Save();
 
-				Thread.Sleep(new TimeSpan(0, 0, 0,refreshInterval));
+				Thread.Sleep(new TimeSpan(0, 0, 0, refreshInterval));
 			}
 
 
@@ -168,21 +164,28 @@ namespace SMZDM_Notifier
 			//ItemBase itemBase = new ItemBase(itemSet);
 
 
-
 			//itemBase.Save();
 		}
 
 		public void StopGetting()
 		{
-
 		}
 
 		private void toolStripAbout_Click(object sender, EventArgs e)
 		{
-			MyAboutBox frMyAboutBox = new MyAboutBox();
+			var frMyAboutBox = new MyAboutBox();
 
 			frMyAboutBox.ShowDialog();
 		}
 
+		private void Main_Load(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void toolStripRefresh_Click(object sender, EventArgs e)
+		{
+			wbsMain.Navigate(Application.StartupPath + "\\" + "ItemBase.xml");
+		}
 	}
 }
