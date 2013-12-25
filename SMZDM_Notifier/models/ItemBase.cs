@@ -39,6 +39,18 @@ namespace SMZDM_Notifier.models
 					doc.LoadXml(FILE_HEADER);
 				}
 				//
+
+				foreach (Item item in _itemSet.Items)
+				{
+					XmlNode itemNode = doc.CreateElement("item");
+					itemNode.InnerXml = item.InnerXml;
+
+					XmlNode channelNode = doc.CreateElement("channel");
+					channelNode.InnerText = item.Channel;
+
+					itemNode.InsertBefore(channelNode, itemNode.FirstChild);
+					doc.DocumentElement.AppendChild(itemNode);
+				}
 				
 				
 
@@ -89,7 +101,7 @@ namespace SMZDM_Notifier.models
 
 		}
 
-		public DateTime GetLatestPubDate(string channel)
+		public DateTime GetLatestPubDate()
 		{
 			DateTime currentLatestPubDate = DateTime.MinValue;
 
@@ -97,7 +109,7 @@ namespace SMZDM_Notifier.models
 			{
 				DateTime pubDate = DateTime.Parse(item.PubDate);
 
-				if (pubDate > currentLatestPubDate && item.Channel == channel)
+				if (pubDate > currentLatestPubDate)
 				{
 					currentLatestPubDate = pubDate;
 				}
