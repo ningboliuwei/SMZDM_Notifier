@@ -186,7 +186,7 @@ namespace SMZDM_Notifier
 
 		private void Main_Load(object sender, EventArgs e)
 		{
-			
+			//
 		}
 
 		private void toolStripRefresh_Click(object sender, EventArgs e)
