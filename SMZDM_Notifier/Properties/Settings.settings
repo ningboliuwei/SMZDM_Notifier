@@ -48,7 +48,7 @@
       <Value Profile="(Default)">data.xsl</Value>
     </Setting>
     <Setting Name="NOTIFY_FILENAME" Type="System.String" Scope="User">
-      <Value Profile="(Default)">notify.html</Value>
+      <Value Profile="(Default)">notifybox.html</Value>
     </Setting>
   </Settings>
 </SettingsFile>

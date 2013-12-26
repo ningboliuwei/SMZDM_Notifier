@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.XPath;
 using SMZDM_Notifier.models;
 using SMZDM_Notifier.Properties;
 
@@ -16,8 +18,6 @@ namespace SMZDM_Notifier
 	public partial class Main : Form
 	{
 		private bool isFetching;
-
-		private const string XML_FILE_NAME = "ItemBase.xml";
 
 		public Main()
 		{
@@ -101,7 +101,7 @@ namespace SMZDM_Notifier
 
 				bgwFetchFeed.CancelAsync();
 
-			
+
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace SMZDM_Notifier
 				}
 
 				var itemSet = new ItemSet();
-				var itemBase = new ItemBase(itemSet);
+				var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME);
 
 				foreach (Feed feed in feeds)
 				{
@@ -191,19 +191,36 @@ namespace SMZDM_Notifier
 
 		private void toolStripRefresh_Click(object sender, EventArgs e)
 		{
-			//wbsMain.Navigate(Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME);
-			string xmlFile = Properties.Settings.Default.DATA_FILENAME;
-			string xslFile = Properties.Settings.Default.XSL_FILENAME;
-			XslCompiledTransform xslDocument = new XslCompiledTransform();
+			XslCompiledTransform xsl = new XslCompiledTransform();
 
-			xslDocument.Load(xslFile);
-			StringWriter stringWriter = new StringWriter();
-			XmlWriter xmlWriter = new XmlTextWriter(stringWriter);
-			xslDocument.Transform(xmlFile, xmlWriter);
-			string s = stringWriter.ToString();
+			xsl.Load(Application.StartupPath + "\\" + Properties.Settings.Default.XSL_FILENAME);
+			
+			XPathDocument doc = new XPathDocument(Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME);
+			XPathNavigator navigator = doc.CreateNavigator();
+			XPathNodeIterator iterator= navigator.Select("items/item[channel='优惠精选']");
 
-			wbsMain.Url = new Uri(Application.StartupPath + "\\" + Properties.Settings.Default.NOTIFY_FILENAME);
-			wbsMain.Document.Write(s);
+			ItemSet set = new ItemSet();
+
+			while (iterator.MoveNext())
+			{
+				Item item = new Item(iterator.Current.OuterXml);
+				item.Channel = "优惠精选";
+				set.Add(item);
+
+				
+				
+			}
+			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + "channel.xml");
+
+			resultItemBase.DataBind();
+			resultItemBase.Save();
+
+			xsl.Transform(Application.StartupPath + "\\" + "channel.xml", Application.StartupPath + "\\" + "result.html")
+			;
+			wbsMain.Navigate(Application.StartupPath + "\\" + "result.html");
+			int i = 0;
+
+
 		}
 
 		private void toolStripComboBox1_Click(object sender, EventArgs e)
@@ -219,6 +236,8 @@ namespace SMZDM_Notifier
 		private void toolStripNext_Click(object sender, EventArgs e)
 		{
 			//wbsMain.GoForward();
+			NotifyBox frmNotifyBox = NotifyBox.GetInstance();
+			frmNotifyBox.Show();
 		}
 
 		private void bgwFetchFeed_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -229,11 +248,12 @@ namespace SMZDM_Notifier
 
 		private void bgwBrowser_DoWork(object sender, DoWorkEventArgs e)
 		{
-			
+
 		}
 
 		private void wbsMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
+
 		}
 	}
 }

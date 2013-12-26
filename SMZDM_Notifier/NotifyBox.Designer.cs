@@ -43,6 +43,7 @@
 			this.wbsNotify.TabIndex = 0;
 			this.wbsNotify.Url = new System.Uri("http://www.smzdm.com", System.UriKind.Absolute);
 			this.wbsNotify.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbsContent_DocumentCompleted);
+			this.wbsNotify.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.wbsNotify_Navigated);
 			// 
 			// NotifyBox
 			// 

@@ -8,41 +8,42 @@ namespace SMZDM_Notifier.models
 	internal class ItemBase
 	{
 		private readonly ItemSet _itemSet;
-		private string dataFilePath;
+		private string _dataFilePath;
 		private XmlDocument doc;
+		private const string contentNamespaceUrl = "http://purl.org/rss/1.0/modules/content/";
 
-		public ItemBase(ItemSet itemSet)
+		#region 读取已有数据文件或新建数据文件
+		public ItemBase(ItemSet itemSet, string dataFilePath)
 		{
-			string FILE_HEADER =string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?><items></items>",Properties.Settings.Default.XSL_FILENAME);
-			this.dataFilePath = Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME;
+
+			string FILE_HEADER = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items xmlns:content=\"{0}\"></items>", contentNamespaceUrl);
+			_dataFilePath = dataFilePath;
 			_itemSet = itemSet;
+
+			//NameTable nameTable = new NameTable();
+			//XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
+			//manager.AddNamespace("content", "http://purl.org/rss/1.0/modules/content/");
 			doc = new XmlDocument();
 
 			try
 			{
-				if (File.Exists(this.dataFilePath))
+				if (File.Exists(_dataFilePath))
 				{
-					doc.Load(this.dataFilePath);
+					doc.Load(this._dataFilePath);
 				}
 				else
 				{
 					doc.LoadXml(FILE_HEADER);
 				}
-				//
 			}
 			catch (Exception exception)
 			{
 				throw new Exception(exception.Message);
 			}
-
-			//XmlNodeList itemNodes = doc.GetElementsByTagName("item");
-
-			//foreach (XmlNode itemNode in itemNodes)
-			//{
-			//	_itemSet.Add(new Item(itemNode.OuterXml));
-			//}
 		}
+		#endregion
 
+		#region 将传入的ItemSet中的Item数据作为节点添加
 		public void DataBind()
 		{
 			foreach (Item item in _itemSet.Items)
@@ -85,29 +86,33 @@ namespace SMZDM_Notifier.models
 				descriptionNode.InnerText = item.Description;
 				itemNode.AppendChild(descriptionNode);
 
+
 				//contentEncoded节点
-				XmlNode contentEncodedNode = doc.CreateElement("contentEncoded");
+				XmlNode contentEncodedNode = doc.CreateElement("content", "encoded", contentNamespaceUrl);
 				contentEncodedNode.InnerText = item.ContentEncoded;
 				itemNode.AppendChild(contentEncodedNode);
 
 				doc.DocumentElement.AppendChild(itemNode);
 			}
 		}
+		#endregion
 
 
+		#region 将内存中的数据保存到磁盘中
 		public void Save()
 		{
 			try
 			{
-				
-				doc.Save(this.dataFilePath);
+				doc.Save(_dataFilePath);
 			}
 			catch (Exception exception)
 			{
 				throw new Exception(exception.Message);
 			}
 		}
+		#endregion
 
+		#region 得到指定频道中最新的item发布时间
 		public DateTime GetLatestPubDate(string channel)
 		{
 			DateTime currentLatestPubDate = DateTime.MinValue;
@@ -116,7 +121,7 @@ namespace SMZDM_Notifier.models
 			{
 				DateTime pubDate = DateTime.Parse(item.PubDate);
 
-				if (pubDate > currentLatestPubDate && item.Channel == channel)
+				if (item.Channel == channel && pubDate > currentLatestPubDate)
 				{
 					currentLatestPubDate = pubDate;
 				}
@@ -124,5 +129,6 @@ namespace SMZDM_Notifier.models
 
 			return currentLatestPubDate;
 		}
+		#endregion
 	}
 }

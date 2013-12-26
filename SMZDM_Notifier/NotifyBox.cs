@@ -12,6 +12,7 @@ namespace SMZDM_Notifier
 		private static readonly NotifyBox _instance = new NotifyBox();
 		private DateTime stayBeginTime;
 		private int staySeconds;
+		private string fileText = "";
 
 		private NotifyBox()
 		{
@@ -22,7 +23,6 @@ namespace SMZDM_Notifier
 		{
 			return _instance;
 		}
-
 		private void NotifyBox_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			e.Cancel = true;
@@ -35,10 +35,9 @@ namespace SMZDM_Notifier
 			//settings.Save();
 		}
 
+		#region 显示提示框
 		public void ShowNotifyBox()
 		{
-			staySeconds = Settings.Default.NotifyStayTime;
-
 			var p = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width, Screen.PrimaryScreen.WorkingArea.Height);
 
 			PointToScreen(p);
@@ -52,33 +51,33 @@ namespace SMZDM_Notifier
 			}
 
 			//tmrStay.Enabled = true;
-			stayBeginTime = DateTime.Now;
+			staySeconds = Settings.Default.NotifyStayTime;//停留时间
+			Thread.Sleep(staySeconds * 1000);
+			Close();
 		}
+		#endregion
 
 		private void NotifyBox_Load(object sender, EventArgs e)
 		{
-			Settings settings = Settings.Default;
-			string appPath = Application.StartupPath;
-
-			Width = settings.NotifyBoxWidth;
-			Height = settings.NotifyBoxHeight;
+			Width = Properties.Settings.Default.NotifyBoxWidth;
+			Height = Properties.Settings.Default.NotifyBoxHeight;
 
 			var streamReader = new StreamReader(Properties.Settings.Default.NOTIFY_FILENAME);
 
-			string s = streamReader.ReadToEnd();
+			fileText = streamReader.ReadToEnd();
 
-			var feed = new Feed("http://feed.smzdm.com", "首页");
+			var feed = new Feed("首页","http://feed.smzdm.com");
 
 			Item item = feed.Items[0];
 
-			s = s.Replace("@title", item.Title)
+			fileText = fileText.Replace("@title", item.Title)
 				.Replace("@link", item.Link)
 				.Replace("@pubDate", item.PubDate)
 				.Replace("@descriptionEncoded", item.ContentEncoded)
 				.Replace("@imgUrl", item.ImgUrl);
 
-			this.wbsNotify.Url = new Uri(appPath + "\\" + Properties.Settings.Default.NOTIFY_FILENAME);
-			this.wbsNotify.Document.Write(s);
+			wbsNotify.Navigate("abount:blank");
+			
 
 			//wbsNotify.Navigate(appPath + "\\NotifyBox.html");
 		}
@@ -96,6 +95,11 @@ namespace SMZDM_Notifier
 
 		private void wbsContent_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
+		}
+
+		private void wbsNotify_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+		{
+			wbsNotify.Document.Write(fileText);
 		}
 	}
 }

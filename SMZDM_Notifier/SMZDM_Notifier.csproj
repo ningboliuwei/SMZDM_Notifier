@@ -123,8 +123,8 @@
     </Content>
     <EmbeddedResource Include="images\default.ico" />
     <Content Include="docs\feed.xml" />
-    <Content Include="NotifyBox.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="notifybox.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

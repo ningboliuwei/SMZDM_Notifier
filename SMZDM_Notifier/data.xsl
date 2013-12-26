@@ -2,7 +2,8 @@
 
 <xsl:stylesheet
   version="1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <xsl:output method="html" indent="yes" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
               doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" />
   <xsl:template match="/">
@@ -102,7 +103,7 @@
             </div>
 
             <div class="ArticleDescription">
-              <xsl:value-of select="contentEncoded" disable-output-escaping="yes" />
+              <xsl:value-of select="content:encoded" disable-output-escaping="yes" />
             </div>
             <div class="ArticleFootor">
               <ul>
