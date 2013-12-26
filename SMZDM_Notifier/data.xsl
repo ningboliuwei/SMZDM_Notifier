@@ -17,7 +17,7 @@
           {
           font-weight:  bold;
           text-align:  center;
-          padding-bottom:  15px;
+          padding-bottom:  16px;
           }
 
           .ArticleContainer
@@ -54,7 +54,7 @@
 
           body{
           background-color:white;
-          font-size:  13px;
+          font-size:  14px;
           }
           a:link {
           color:#3165C6;

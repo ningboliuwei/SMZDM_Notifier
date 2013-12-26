@@ -109,6 +109,7 @@
     <None Include="docs\什么值得买提醒器.xmind" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\box.png" />
     <Content Include="images\close.png" />
     <Content Include="images\gear.png" />
     <Content Include="images\info.png" />

@@ -50,5 +50,11 @@
     <Setting Name="NOTIFY_FILENAME" Type="System.String" Scope="User">
       <Value Profile="(Default)">notifybox.html</Value>
     </Setting>
+    <Setting Name="RESULT_HTML_FILENAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">result.html</Value>
+    </Setting>
+    <Setting Name="RESULT_XML_FILENAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">result.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

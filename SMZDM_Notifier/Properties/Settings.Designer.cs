@@ -216,5 +216,29 @@ namespace SMZDM_Notifier.Properties {
                 this["NOTIFY_FILENAME"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("result.html")]
+        public string RESULT_HTML_FILENAME {
+            get {
+                return ((string)(this["RESULT_HTML_FILENAME"]));
+            }
+            set {
+                this["RESULT_HTML_FILENAME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("result.xml")]
+        public string RESULT_XML_FILENAME {
+            get {
+                return ((string)(this["RESULT_XML_FILENAME"]));
+            }
+            set {
+                this["RESULT_XML_FILENAME"] = value;
+            }
+        }
     }
 }

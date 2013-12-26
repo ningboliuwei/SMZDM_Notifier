@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
@@ -24,7 +25,7 @@ namespace SMZDM_Notifier
 			InitializeComponent();
 		}
 
-		private void toolStripStart_Click(object sender, EventArgs e)
+		private void toolStripButtonStart_Click(object sender, EventArgs e)
 		{
 			//if (btnGetFeed.text == startText)
 			//{
@@ -42,12 +43,12 @@ namespace SMZDM_Notifier
 
 				isFetching = true;
 
-				toolStripStart.Visible = false;
-				toolStripStop.Visible = true;
+				toolStripButtonStart.Visible = false;
+				toolStripButtonStop.Visible = true;
 			}
 		}
 
-		private void toolStripPreferences_Click(object sender, EventArgs e)
+		private void toolStripButtonPreferences_Click(object sender, EventArgs e)
 		{
 			var frmPreferences = new Preferences();
 
@@ -93,7 +94,7 @@ namespace SMZDM_Notifier
 			}
 		}
 
-		private void toolStripStop_Click(object sender, EventArgs e)
+		private void toolStripButtonStop_Click(object sender, EventArgs e)
 		{
 			if (isFetching)
 			{
@@ -177,7 +178,7 @@ namespace SMZDM_Notifier
 		{
 		}
 
-		private void toolStripAbout_Click(object sender, EventArgs e)
+		private void toolStripButtonAbout_Click(object sender, EventArgs e)
 		{
 			var frMyAboutBox = new MyAboutBox();
 
@@ -186,39 +187,13 @@ namespace SMZDM_Notifier
 
 		private void Main_Load(object sender, EventArgs e)
 		{
-			//
+			BindToolStripComboBoxChannel();
+			toolStripComboBoxChannel.SelectedIndex = 0;
 		}
 
-		private void toolStripRefresh_Click(object sender, EventArgs e)
+		private void toolStripButtonRefresh_Click(object sender, EventArgs e)
 		{
-			XslCompiledTransform xsl = new XslCompiledTransform();
-
-			xsl.Load(Application.StartupPath + "\\" + Properties.Settings.Default.XSL_FILENAME);
-			
-			XPathDocument doc = new XPathDocument(Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME);
-			XPathNavigator navigator = doc.CreateNavigator();
-			XPathNodeIterator iterator= navigator.Select("items/item[channel='优惠精选']");
-
-			ItemSet set = new ItemSet();
-
-			while (iterator.MoveNext())
-			{
-				Item item = new Item(iterator.Current.OuterXml);
-				item.Channel = "优惠精选";
-				set.Add(item);
-
-				
-				
-			}
-			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + "channel.xml");
-
-			resultItemBase.DataBind();
-			resultItemBase.Save();
-
-			xsl.Transform(Application.StartupPath + "\\" + "channel.xml", Application.StartupPath + "\\" + "result.html")
-			;
-			wbsMain.Navigate(Application.StartupPath + "\\" + "result.html");
-			int i = 0;
+			ShowChannel(toolStripComboBoxChannel.Text);
 
 
 		}
@@ -242,8 +217,8 @@ namespace SMZDM_Notifier
 
 		private void bgwFetchFeed_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
-			toolStripStart.Visible = true;
-			toolStripStop.Visible = false;
+			toolStripButtonStart.Visible = true;
+			toolStripButtonStop.Visible = false;
 		}
 
 		private void bgwBrowser_DoWork(object sender, DoWorkEventArgs e)
@@ -254,6 +229,75 @@ namespace SMZDM_Notifier
 		private void wbsMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
 		{
 
+		}
+
+		//加载频道至工具栏中下拉列表
+		private void BindToolStripComboBoxChannel()
+		{
+			
+
+			string[] channelAndUrls = Properties.Settings.Default.ChannelUrls.Split(';');
+
+			toolStripComboBoxChannel.Items.Add("全部频道");
+			foreach (string channelAndUrl in channelAndUrls)
+			{
+				toolStripComboBoxChannel.Items.Add(channelAndUrl.Split('|')[0]);
+			}
+
+			
+		}
+
+		private void ShowChannel(string channel)
+		{
+			XslCompiledTransform xsl = new XslCompiledTransform();
+
+			xsl.Load(Application.StartupPath + "\\" + Properties.Settings.Default.XSL_FILENAME);
+
+			XPathDocument doc = new XPathDocument(Application.StartupPath + "\\" + Properties.Settings.Default.DATA_FILENAME);
+			XPathNavigator navigator = doc.CreateNavigator();
+
+			string xPath = "";
+
+			if (channel == toolStripComboBoxChannel.Items[0].ToString())
+			{
+				xPath = "items/item";
+			}
+			else
+			{
+				xPath = string.Format("items/item[channel='{0}']",channel);
+			}
+
+			XPathNodeIterator iterator = navigator.Select(xPath);
+
+			ItemSet set = new ItemSet();
+
+			int count = 0;
+			while (iterator.MoveNext())
+			{
+				Item item = new Item(iterator.Current.OuterXml);
+				item.Channel = channel;
+				set.Add(item);
+				count++;
+
+				if (count == 10)
+				{
+					break;
+				}
+			}
+
+			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME);
+
+			resultItemBase.DataBind();
+			resultItemBase.Save();
+
+			xsl.Transform(Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,
+				Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_HTML_FILENAME);
+			wbsMain.Navigate(Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_HTML_FILENAME);
+		}
+
+		private void toolStripComboBoxChannel_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ShowChannel(toolStripComboBoxChannel.Text);
 		}
 	}
 }
