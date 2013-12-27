@@ -13,21 +13,17 @@ namespace SMZDM_Notifier.models
 		private const string contentNamespaceUrl = "http://purl.org/rss/1.0/modules/content/";
 
 		#region 读取已有数据文件或新建数据文件
-		public ItemBase(ItemSet itemSet, string dataFilePath)
+		public ItemBase(ItemSet itemSet, string dataFilePath, bool isAppend)
 		{
-
 			string FILE_HEADER = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items xmlns:content=\"{0}\"></items>", contentNamespaceUrl);
 			_dataFilePath = dataFilePath;
 			_itemSet = itemSet;
 
-			//NameTable nameTable = new NameTable();
-			//XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
-			//manager.AddNamespace("content", "http://purl.org/rss/1.0/modules/content/");
 			doc = new XmlDocument();
 
 			try
 			{
-				if (File.Exists(_dataFilePath))
+				if (File.Exists(_dataFilePath) && isAppend)
 				{
 					doc.Load(this._dataFilePath);
 				}
@@ -46,8 +42,11 @@ namespace SMZDM_Notifier.models
 		#region 将传入的ItemSet中的Item数据作为节点添加
 		public void DataBind()
 		{
-			foreach (Item item in _itemSet.Items)
+			doc.DocumentElement.AppendChild(doc.CreateElement("empty"));
+
+			for (int i = _itemSet.Items.Count - 1; i >= 0; i--)
 			{
+				Item item = _itemSet.Items[i];
 				//item节点
 				XmlNode itemNode = doc.CreateElement("item");
 
@@ -92,7 +91,9 @@ namespace SMZDM_Notifier.models
 				contentEncodedNode.InnerText = item.ContentEncoded;
 				itemNode.AppendChild(contentEncodedNode);
 
-				doc.DocumentElement.AppendChild(itemNode);
+			
+					doc.InsertBefore(itemNode, doc.DocumentElement.FirstChild);
+					
 			}
 		}
 		#endregion

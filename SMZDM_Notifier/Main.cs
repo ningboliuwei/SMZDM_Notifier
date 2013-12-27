@@ -57,7 +57,7 @@ namespace SMZDM_Notifier
 
 		private void bgwFetchFeed_DoWork(object sender, DoWorkEventArgs e)
 		{
-			#region 加载复选框数组
+			#region 读取要抓取的频道
 
 			string[] channelAndUrls = Settings.Default.ChannelUrls.Split(';');
 			var urls = new string[channelAndUrls.Length];
@@ -131,7 +131,7 @@ namespace SMZDM_Notifier
 				}
 
 				var itemSet = new ItemSet();
-				var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME);
+				var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME, true);
 
 				foreach (Feed feed in feeds)
 				{
@@ -193,7 +193,7 @@ namespace SMZDM_Notifier
 
 		private void toolStripButtonRefresh_Click(object sender, EventArgs e)
 		{
-			ShowChannel(toolStripComboBoxChannel.Text);
+			ShowResult(toolStripComboBoxChannel.Text);
 
 
 		}
@@ -234,7 +234,7 @@ namespace SMZDM_Notifier
 		//加载频道至工具栏中下拉列表
 		private void BindToolStripComboBoxChannel()
 		{
-			
+
 
 			string[] channelAndUrls = Properties.Settings.Default.ChannelUrls.Split(';');
 
@@ -244,10 +244,10 @@ namespace SMZDM_Notifier
 				toolStripComboBoxChannel.Items.Add(channelAndUrl.Split('|')[0]);
 			}
 
-			
+
 		}
 
-		private void ShowChannel(string channel)
+		private void ShowResult(string channel)
 		{
 			XslCompiledTransform xsl = new XslCompiledTransform();
 
@@ -264,7 +264,7 @@ namespace SMZDM_Notifier
 			}
 			else
 			{
-				xPath = string.Format("items/item[channel='{0}']",channel);
+				xPath = string.Format("items/item[channel='{0}']", channel);
 			}
 
 			XPathNodeIterator iterator = navigator.Select(xPath);
@@ -272,6 +272,7 @@ namespace SMZDM_Notifier
 			ItemSet set = new ItemSet();
 
 			int count = 0;
+
 			while (iterator.MoveNext())
 			{
 				Item item = new Item(iterator.Current.OuterXml);
@@ -285,7 +286,7 @@ namespace SMZDM_Notifier
 				}
 			}
 
-			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME);
+			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,false);
 
 			resultItemBase.DataBind();
 			resultItemBase.Save();
@@ -297,7 +298,7 @@ namespace SMZDM_Notifier
 
 		private void toolStripComboBoxChannel_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			ShowChannel(toolStripComboBoxChannel.Text);
+			//ShowResult(toolStripComboBoxChannel.Text);
 		}
 	}
 }
