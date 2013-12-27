@@ -4,25 +4,34 @@ namespace SMZDM_Notifier.models
 {
 	internal class ItemSet
 	{
-		private IList<Item> _items = new List<Item>();
+		private List<Item> _items = new List<Item>();
 
-		public IList<Item> Items
+		public List<Item> Items
 		{
 			get { return _items; }
-			set { _items = value; }
+			#region 目前用不上
+			//set { _items = value; }
+			#endregion
 		}
 
-		public string Text { get; set; }
+		#region 目前用不上
+		//public string Text { get; set; }
+		#endregion
 
-
+		/// <summary>
+		/// 添加一个新的Item到当前ItemSet中
+		/// </summary>
+		/// <param name="item">要添加的Item对象</param>
 		public void Add(Item item)
 		{
 			_items.Add(item);
 		}
 
-		public void Remove(Item item)
-		{
-			_items.Remove(item);
-		}
+		#region 目前用不上
+		//public void Remove(Item item)
+		//{
+		//	_items.Remove(item);
+		//}
+		#endregion
 	}
 }

@@ -6,12 +6,15 @@ namespace SMZDM_Notifier
 {
 	internal class Feed
 	{
-		private IList<Item> _items = new List<Item>();
+		private List<Item> _items = new List<Item>();
 
-		#region 获取Feed并转换为Feed对象
+		/// <summary>
+		/// 根据给定的url获取Feed并生成Feed对象
+		/// </summary>
+		/// <param name="channel">频道名</param>
+		/// <param name="url">Feed的URL</param>
 		public Feed(string channel, string url)
 		{
-			Channel = channel;
 			var doc = new XmlDocument();
 
 			try
@@ -23,8 +26,10 @@ namespace SMZDM_Notifier
 				throw new Exception(exception.Message);
 			}
 
-			LastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText; //RSS更新时间
-			Channel = channel;//将传入的Feed名称赋值给Feed.Channel属性
+			#region 目前用不上
+			//LastBuildDate = doc.GetElementsByTagName("lastBuildDate")[0].InnerText; //RSS更新时间
+			//Channel = channel;//将传入的Feed名称赋值给Feed.Channel属性
+			#endregion
 
 			XmlNodeList itemNodes = doc.GetElementsByTagName("item");
 
@@ -36,15 +41,14 @@ namespace SMZDM_Notifier
 				_items.Add(item);
 			}
 		}
+
+		#region 目前用不上
+		//public string LastBuildDate { get; set; }
 		#endregion
 
-		public string LastBuildDate { get; set; }
-
-		public IList<Item> Items
+		public List<Item> Items
 		{
 			get { return _items; }
 		}
-
-		public string Channel { get; set; }
 	}
 }

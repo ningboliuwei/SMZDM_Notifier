@@ -111,10 +111,8 @@ namespace SMZDM_Notifier
 			Application.Exit();
 		}
 
-		public void FetchFeed(string[] urls, DoWorkEventArgs e)
+		public void FetchFeed(string[] urls, int refreshInterval, DoWorkEventArgs e)
 		{
-			int refreshInterval = Settings.Default.RefreshInterval;
-
 			while (true)
 			{
 				if (bgwFetchFeed.CancellationPending)
@@ -123,7 +121,8 @@ namespace SMZDM_Notifier
 					return;
 				}
 
-				IList<Feed> feeds = new List<Feed>();
+				#region 获取所有的Feed并将所有Item添加到ItemSet中去
+				List<Feed> feeds = new List<Feed>();
 
 				foreach (string url in urls)
 				{
@@ -131,42 +130,29 @@ namespace SMZDM_Notifier
 				}
 
 				var itemSet = new ItemSet();
-				var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME, true);
 
 				foreach (Feed feed in feeds)
 				{
-					DateTime latestItemBasePubDate = itemBase.GetLatestPubDate(feed.Channel);
-
 					foreach (Item item in feed.Items)
 					{
-						if (DateTime.Parse(item.PubDate) > latestItemBasePubDate && item.Channel == feed.Channel)
-						{
-							itemSet.Add(item);
-						}
+						itemSet.Add(item);
 					}
 				}
+				#endregion
 
-				itemBase.DataBind();
-				itemBase.Save();
+				#region 对添加到ItemSet中的所有Item按照时间先后排序
+				itemSet.Items.Sort(delegate(Item itemA, Item itemB)
+				{
+					return DateTime.Parse(itemA.PubDate).CompareTo(
+						DateTime.Parse(itemB.PubDate));
+				});
+				#endregion
+
+				int i = 0;
 
 				Thread.Sleep(new TimeSpan(0, 0, 0, refreshInterval));
 			}
 
-
-			int i = 1;
-
-			//Thread.Sleep(new TimeSpan(0, 0, 5, 0));
-
-			//ItemSet itemSet = new ItemSet();
-
-			//foreach (Feed feed in feeds)
-			//{
-			//	foreach (Item item in feed.Items)
-			//	{
-			//		itemSet.Add(item);
-			//	}
-
-			//}
 
 			//ItemBase itemBase = new ItemBase(itemSet);
 
@@ -286,9 +272,9 @@ namespace SMZDM_Notifier
 				}
 			}
 
-			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,false);
+			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME, false);
 
-			resultItemBase.DataBind();
+			resultItemBase.AddItems();
 			resultItemBase.Save();
 
 			xsl.Transform(Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,
