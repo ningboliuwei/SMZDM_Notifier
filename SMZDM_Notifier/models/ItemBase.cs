@@ -8,28 +8,47 @@ namespace SMZDM_Notifier.models
 	internal class ItemBase
 	{
 		private readonly ItemSet _itemSet;
-		private string _dataFilePath;
-		private XmlDocument doc;
+
+		private XmlDocument _doc = new XmlDocument();
+
 		private const string contentNamespaceUrl = "http://purl.org/rss/1.0/modules/content/";
 
-		#region 读取已有数据文件或新建数据文件
-		public ItemBase(ItemSet itemSet, string dataFilePath, bool isAppend)
+		/// <summary>
+		/// 若指定的数据文件不存在，则在指定路径创建该文件
+		/// </summary>
+		/// <param name="filePath">要创建的数据文件的路径</param>
+ 
+		public void Create(string filePath)
 		{
-			string FILE_HEADER = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items xmlns:content=\"{0}\"></items>", contentNamespaceUrl);
-			_dataFilePath = dataFilePath;
-			_itemSet = itemSet;
-
-			doc = new XmlDocument();
-
 			try
 			{
-				if (File.Exists(_dataFilePath) && isAppend)
+				if (!File.Exists(filePath))
 				{
-					doc.Load(this._dataFilePath);
+					string FILE_HEADER = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" ?><items xmlns:content=\"{0}\"></items>", contentNamespaceUrl);
+
+					_doc.LoadXml(FILE_HEADER);
+					_doc.Save(filePath);
 				}
-				else
+
+			}
+			catch (Exception exception)
+			{
+				throw new Exception(exception.Message);
+			}
+		}
+		
+
+		/// <summary>
+		/// 将指定路径的数据文件加载到XmlDocument对象中
+		/// </summary>
+		/// <param name="filePath"></param>
+		public void Load(string filePath)
+		{
+			try
+			{
+				if (!File.Exists(filePath))
 				{
-					doc.LoadXml(FILE_HEADER);
+					_doc.Load(filePath);
 				}
 			}
 			catch (Exception exception)
@@ -37,99 +56,106 @@ namespace SMZDM_Notifier.models
 				throw new Exception(exception.Message);
 			}
 		}
-		#endregion
 
-		#region 将传入的ItemSet中的Item数据作为节点添加
-		public void DataBind()
+		/// <summary>
+		///将传入的ItemSet中的Item数据作为节点添加到现有doc中
+		/// </summary>
+		/// <param name="newItemSet">保存有要添加item的ItemSet</param>
+		public void AddItems(ItemSet newItemSet)
 		{
-			doc.DocumentElement.AppendChild(doc.CreateElement("empty"));
+			XmlNode tempNode = _doc.CreateElement("TEMP");
 
-			for (int i = _itemSet.Items.Count - 1; i >= 0; i--)
+			if (_doc.DocumentElement.HasChildNodes == false)
 			{
-				Item item = _itemSet.Items[i];
+				_doc.DocumentElement.AppendChild(tempNode);
+			}
+
+			for (int i =1; i < newItemSet.Items.Count; i++)
+			{
+				Item item = newItemSet.Items[i];
 				//item节点
-				XmlNode itemNode = doc.CreateElement("item");
+				XmlNode itemNode = _doc.CreateElement("item");
 
 				//channel节点
-				XmlNode channelNode = doc.CreateElement("channel");
+				XmlNode channelNode = _doc.CreateElement("channel");
 				channelNode.InnerText = item.Channel;
 				itemNode.AppendChild(channelNode);
 
 				//image节点
-				XmlNode imgNode = doc.CreateElement("image");
+				XmlNode imgNode = _doc.CreateElement("image");
 				imgNode.InnerText = item.ImgUrl;
 				itemNode.AppendChild(imgNode);
 
 				//title节点
-				XmlNode titleNode = doc.CreateElement("title");
+				XmlNode titleNode = _doc.CreateElement("title");
 				titleNode.InnerText = item.Title;
 				itemNode.AppendChild(titleNode);
 
 				//link节点
-				XmlNode linkNode = doc.CreateElement("link");
+				XmlNode linkNode = _doc.CreateElement("link");
 				linkNode.InnerText = item.Link;
 				itemNode.AppendChild(linkNode);
 
 				//comments节点
-				XmlNode commentsNode = doc.CreateElement("comments");
+				XmlNode commentsNode = _doc.CreateElement("comments");
 				commentsNode.InnerText = item.Comments;
 				itemNode.AppendChild(commentsNode);
 
 				//pubDate节点
-				XmlNode pubDateNode = doc.CreateElement("pubDate");
+				XmlNode pubDateNode = _doc.CreateElement("pubDate");
 				pubDateNode.InnerText = item.PubDate;
 				itemNode.AppendChild(pubDateNode);
 
 				//description节点
-				XmlNode descriptionNode = doc.CreateElement("description");
+				XmlNode descriptionNode = _doc.CreateElement("description");
 				descriptionNode.InnerText = item.Description;
 				itemNode.AppendChild(descriptionNode);
 
 
 				//contentEncoded节点
-				XmlNode contentEncodedNode = doc.CreateElement("content", "encoded", contentNamespaceUrl);
+				XmlNode contentEncodedNode = _doc.CreateElement("content", "encoded", contentNamespaceUrl);
 				contentEncodedNode.InnerText = item.ContentEncoded;
 				itemNode.AppendChild(contentEncodedNode);
 
-			
-					doc.InsertBefore(itemNode, doc.DocumentElement.FirstChild);
-					
+				_doc.DocumentElement.InsertBefore(itemNode, _doc.DocumentElement.FirstChild);
 			}
+
+			_doc.DocumentElement.RemoveChild(tempNode);
 		}
-		#endregion
 
-
-		#region 将内存中的数据保存到磁盘中
-		public void Save()
+		/// <summary>
+		/// 将XmlDocument中的数据保存到指定路径
+		/// </summary>
+		/// <param name="filePath">要保存的文件路径</param>
+		public void Save(string filePath)
 		{
 			try
 			{
-				doc.Save(_dataFilePath);
+				_doc.Save(filePath);
 			}
 			catch (Exception exception)
 			{
 				throw new Exception(exception.Message);
 			}
 		}
-		#endregion
 
-		#region 得到指定频道中最新的item发布时间
-		public DateTime GetLatestPubDate(string channel)
-		{
-			DateTime currentLatestPubDate = DateTime.MinValue;
+		//#region 得到当前内存中存储的所有item中最新的item发布时间
+		//public DateTime GetLatestPubDate(string channel)
+		//{
+		//	DateTime currentLatestPubDate = DateTime.MinValue;
 
-			foreach (Item item in _itemSet.Items)
-			{
-				DateTime pubDate = DateTime.Parse(item.PubDate);
+		//	foreach (Item item in _itemSet.Items)
+		//	{
+		//		DateTime pubDate = DateTime.Parse(item.PubDate);
 
-				if (item.Channel == channel && pubDate > currentLatestPubDate)
-				{
-					currentLatestPubDate = pubDate;
-				}
-			}
+		//		if (item.Channel == channel && pubDate > currentLatestPubDate)
+		//		{
+		//			currentLatestPubDate = pubDate;
+		//		}
+		//	}
 
-			return currentLatestPubDate;
-		}
-		#endregion
+		//	return currentLatestPubDate;
+		//}
+		//#endregion
 	}
 }

@@ -111,7 +111,7 @@ namespace SMZDM_Notifier
 			Application.Exit();
 		}
 
-		public void FetchFeed(string[] urls, DoWorkEventArgs e)
+		public void FetchFeed(string[] urls, int refreshInterval, DoWorkEventArgs e)
 		{
 			int refreshInterval = Settings.Default.RefreshInterval;
 
@@ -123,7 +123,8 @@ namespace SMZDM_Notifier
 					return;
 				}
 
-				IList<Feed> feeds = new List<Feed>();
+				#region 获取所有的Feed并将所有Item添加到ItemSet中去
+				List<Feed> feeds = new List<Feed>();
 
 				foreach (string url in urls)
 				{
@@ -155,6 +156,13 @@ namespace SMZDM_Notifier
 					feed.Save("e:\\temp\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + feed.Channel + ".xml");
 				}
 
+				{
+					return DateTime.Parse(itemA.PubDate).CompareTo(
+						DateTime.Parse(itemB.PubDate));
+				});
+				#endregion
+
+				int i = 0;
 				Thread.Sleep(new TimeSpan(0, 0, 0, refreshInterval));
 			}
 
@@ -294,7 +302,7 @@ namespace SMZDM_Notifier
 
 			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME, false);
 
-			resultItemBase.DataBind();
+			resultItemBase.AddItems();
 			resultItemBase.Save();
 
 			xsl.Transform(Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,

@@ -20,7 +20,9 @@ namespace SMZDM_Notifier
 		}
 
 
-		//显示窗体
+		/// <summary>
+		/// 显示窗体
+		/// </summary>
 		private void ShowForm()
 		{
 			WindowState = FormWindowState.Normal;
@@ -28,13 +30,13 @@ namespace SMZDM_Notifier
 			Show();
 		}
 
-		//双击通知栏图标
+		
 		private void notifyIcon_DoubleClick(object sender, EventArgs e)
 		{
 			ShowForm();
 		}
 
-		//鼠标点击通知栏图标
+		
 		private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
 		{
 			//鼠标单击左键时
@@ -44,7 +46,7 @@ namespace SMZDM_Notifier
 			}
 		}
 
-		//鼠标双击通知栏图标
+		
 		private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			//鼠标双击左键时
@@ -54,7 +56,7 @@ namespace SMZDM_Notifier
 			}
 		}
 
-		//关闭窗体
+		
 		private void Main_FormClosing(object sender, FormClosingEventArgs e)
 		{
 		}
@@ -67,7 +69,7 @@ namespace SMZDM_Notifier
 				MessageBox.Show(this, "确定恢复为默认设置吗?", "问题", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 					MessageBoxDefaultButton.Button2) == DialogResult.Yes)
 			{
-//恢复到默认设置
+				//恢复到默认设置
 				Settings.Default.Reset();
 				LoadSettings();
 			}
@@ -77,7 +79,6 @@ namespace SMZDM_Notifier
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			SaveSettings();
-			//LoadSettings();
 			Close();
 		}
 
@@ -95,7 +96,7 @@ namespace SMZDM_Notifier
 			settings.MinimizeWhenStartup = chkMinimizeWhenStartup.Checked;
 			settings.AutoStartFetching = chkAutoStartFetching.Checked;
 
-			#region 保存频道复选框选中状态
+			#region 保存频道复选框选中状态至设置
 
 			string[] channelAndUrls = settings.ChannelUrls.Split(';');
 
@@ -146,7 +147,7 @@ namespace SMZDM_Notifier
 			cmbNotifyStayTime.Text = settings.NotifyStayTime.ToString();
 			cmbRefreshInterval.Text = settings.RefreshInterval.ToString();
 
-			#region 加载复选框数组
+			#region 根据设置添加相应的复选框控件至界面
 
 			string[] channelAndUrls = settings.ChannelUrls.Split(';');
 
@@ -173,15 +174,9 @@ namespace SMZDM_Notifier
 			LoadSettings();
 		}
 
-		//放弃修改按钮
+
 		private void btnCancel_Click(object sender, EventArgs e)
 		{
-			//LoadSettings();
-
-			//NotifyBox frmNotifyBox = NotifyBox.GetInstance();//Form1为要弹出的窗体（提示框），
-
-			//frmNotifyBox.ShowNotifyBox();
-
 			Close();
 		}
 
