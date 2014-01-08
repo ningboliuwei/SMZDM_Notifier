@@ -130,24 +130,30 @@ namespace SMZDM_Notifier
 					feeds.Add(new Feed(url.Split('|')[0], url.Split('|')[1]));
 				}
 
-				var itemSet = new ItemSet();
-				var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME, true);
+				//backup
+				//var itemSet = new ItemSet();
+				//var itemBase = new ItemBase(itemSet, Properties.Settings.Default.DATA_FILENAME, true);
 
-				foreach (Feed feed in feeds)
+				//foreach (Feed feed in feeds)
+				//{
+				//	DateTime latestItemBasePubDate = itemBase.GetLatestPubDate(feed.Channel);
+
+				//	foreach (Item item in feed.Items)
+				//	{
+				//		if (DateTime.Parse(item.PubDate) > latestItemBasePubDate && item.Channel == feed.Channel)
+				//		{
+				//			itemSet.Add(item);
+				//		}
+				//	}
+				//}
+
+				//itemBase.DataBind();
+				//itemBase.Save();
+				//backup-end
+				foreach (var feed in feeds)
 				{
-					DateTime latestItemBasePubDate = itemBase.GetLatestPubDate(feed.Channel);
-
-					foreach (Item item in feed.Items)
-					{
-						if (DateTime.Parse(item.PubDate) > latestItemBasePubDate && item.Channel == feed.Channel)
-						{
-							itemSet.Add(item);
-						}
-					}
+					feed.Save("e:\\temp\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + feed.Channel + ".xml");
 				}
-
-				itemBase.DataBind();
-				itemBase.Save();
 
 				Thread.Sleep(new TimeSpan(0, 0, 0, refreshInterval));
 			}
@@ -286,7 +292,7 @@ namespace SMZDM_Notifier
 				}
 			}
 
-			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME,false);
+			ItemBase resultItemBase = new ItemBase(set, Application.StartupPath + "\\" + Properties.Settings.Default.RESULT_XML_FILENAME, false);
 
 			resultItemBase.DataBind();
 			resultItemBase.Save();

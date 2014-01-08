@@ -121,9 +121,12 @@
     <Content Include="images\zoom.png" />
     <Content Include="data.xsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="images\default.ico" />
-    <Content Include="docs\feed.xml" />
+    <Content Include="docs\feed.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="notifybox.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
